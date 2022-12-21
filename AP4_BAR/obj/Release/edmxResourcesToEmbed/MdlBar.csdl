@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MdlBar" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AEMPORTER">
+    <Key>
+      <PropertyRef Name="IDCOMMANDE_HER_1" />
+    </Key>
+    <Property Name="IDCOMMANDE_HER_1" Type="Int32" Nullable="false" />
+    <Property Name="IDCOMMANDE" Type="Int32" Nullable="false" />
+    <Property Name="ID_USER" Type="Int32" Nullable="false" />
+    <Property Name="HEURERETRAIT" Type="DateTime" />
+    <Property Name="CODERETRAIT" Type="Int64" />
+    <NavigationProperty Name="CLIENTS" Relationship="Self.FK_AEMPORTER_CLIENTS" FromRole="AEMPORTER" ToRole="CLIENTS" />
+    <NavigationProperty Name="COMMANDE" Relationship="Self.FK_AEMPORTER_COMMANDE" FromRole="AEMPORTER" ToRole="COMMANDE" />
+    <NavigationProperty Name="COMMANDE1" Relationship="Self.FK_AEMPORTER_COMMANDE1" FromRole="AEMPORTER" ToRole="COMMANDE" />
+  </EntityType>
+  <EntityType Name="ALLERGENE">
+    <Key>
+      <PropertyRef Name="ID_ALLERGENE" />
+    </Key>
+    <Property Name="ID_ALLERGENE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.CATEGORISER" FromRole="ALLERGENE" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="BARMAN">
+    <Key>
+      <PropertyRef Name="ID_USER" />
+    </Key>
+    <Property Name="ID_USER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="ESTDIRIGEANT" Type="Boolean" />
+    <Property Name="DATE_ARRIVER" Type="DateTime" />
+    <Property Name="DATE_DEPART" Type="DateTime" />
+    <Property Name="ESTBARMAN" Type="Boolean" />
+    <Property Name="NOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="PRENOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="MDP" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BARS" Relationship="Self.FK_BARMAN_BARS" FromRole="BARMAN" ToRole="BARS" />
+    <NavigationProperty Name="SURPLACE" Relationship="Self.FK_SURPLACE_BARMAN" FromRole="BARMAN" ToRole="SURPLACE" />
+  </EntityType>
+  <EntityType Name="BARS">
+    <Key>
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_TYPE" Type="Int32" Nullable="false" />
+    <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="PHOTOBAR" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="OUVERTURE" Type="Time" />
+    <Property Name="FERMETURE" Type="Time" />
+    <Property Name="ADRESSE" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BARMAN" Relationship="Self.FK_BARMAN_BARS" FromRole="BARS" ToRole="BARMAN" />
+    <NavigationProperty Name="TYPEBAR" Relationship="Self.FK_BARS_TYPEBAR" FromRole="BARS" ToRole="TYPEBAR" />
+    <NavigationProperty Name="STOCKER" Relationship="Self.FK_STOCKER_BARS" FromRole="BARS" ToRole="STOCKER" />
+    <NavigationProperty Name="COMMANDE" Relationship="Self.RECOIS" FromRole="BARS" ToRole="COMMANDE" />
+  </EntityType>
+  <EntityType Name="BOISSON">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="ESTALCOOLISE" Type="Boolean" />
+    <Property Name="DEGREALCOOL" Type="Int64" />
+    <Property Name="VOLUME" Type="Int64" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_BOISSON_PRODUIT" FromRole="BOISSON" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="CLIENTS">
+    <Key>
+      <PropertyRef Name="ID_USER" />
+    </Key>
+    <Property Name="ID_USER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DATEINSCRIPTION" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="NOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="PRENOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="MDP" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AEMPORTER" Relationship="Self.FK_AEMPORTER_CLIENTS" FromRole="CLIENTS" ToRole="AEMPORTER" />
+  </EntityType>
+  <EntityType Name="COMMANDE">
+    <Key>
+      <PropertyRef Name="IDCOMMANDE" />
+    </Key>
+    <Property Name="IDCOMMANDE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HEURECOMMANDE" Type="DateTime" />
+    <NavigationProperty Name="AEMPORTER" Relationship="Self.FK_AEMPORTER_COMMANDE" FromRole="COMMANDE" ToRole="AEMPORTER" />
+    <NavigationProperty Name="AEMPORTER1" Relationship="Self.FK_AEMPORTER_COMMANDE1" FromRole="COMMANDE" ToRole="AEMPORTER" />
+    <NavigationProperty Name="COMPOSER" Relationship="Self.FK_COMPOSER_COMMANDE" FromRole="COMMANDE" ToRole="COMPOSER" />
+    <NavigationProperty Name="SURPLACE" Relationship="Self.FK_SURPLACE_COMMANDE" FromRole="COMMANDE" ToRole="SURPLACE" />
+    <NavigationProperty Name="BARS" Relationship="Self.RECOIS" FromRole="COMMANDE" ToRole="BARS" />
+  </EntityType>
+  <EntityType Name="COMPOSER">
+    <Key>
+      <PropertyRef Name="IDCOMMANDE" />
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="IDCOMMANDE" Type="Int32" Nullable="false" />
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="QUANTITE" Type="Int64" />
+    <NavigationProperty Name="COMMANDE" Relationship="Self.FK_COMPOSER_COMMANDE" FromRole="COMPOSER" ToRole="COMMANDE" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_COMPOSER_PRODUIT" FromRole="COMPOSER" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="NOURRITURE">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="POIDS" Type="Int64" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_NOURRITURE_PRODUIT" FromRole="NOURRITURE" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="PRODUIT">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BOISSON" Relationship="Self.FK_BOISSON_PRODUIT" FromRole="PRODUIT" ToRole="BOISSON" />
+    <NavigationProperty Name="COMPOSER" Relationship="Self.FK_COMPOSER_PRODUIT" FromRole="PRODUIT" ToRole="COMPOSER" />
+    <NavigationProperty Name="NOURRITURE" Relationship="Self.FK_NOURRITURE_PRODUIT" FromRole="PRODUIT" ToRole="NOURRITURE" />
+    <NavigationProperty Name="STOCKER" Relationship="Self.FK_STOCKER_PRODUIT" FromRole="PRODUIT" ToRole="STOCKER" />
+    <NavigationProperty Name="ALLERGENE" Relationship="Self.CATEGORISER" FromRole="PRODUIT" ToRole="ALLERGENE" />
+  </EntityType>
+  <EntityType Name="STOCKER">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="QUANTITESTOCK" Type="Int64" />
+    <Property Name="PRIX" Type="Int64" />
+    <NavigationProperty Name="BARS" Relationship="Self.FK_STOCKER_BARS" FromRole="STOCKER" ToRole="BARS" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_STOCKER_PRODUIT" FromRole="STOCKER" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="SURPLACE">
+    <Key>
+      <PropertyRef Name="IDCOMMANDE" />
+    </Key>
+    <Property Name="IDCOMMANDE" Type="Int32" Nullable="false" />
+    <Property Name="ID_USER" Type="Int32" Nullable="false" />
+    <Property Name="NUMTABLE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BARMAN" Relationship="Self.FK_SURPLACE_BARMAN" FromRole="SURPLACE" ToRole="BARMAN" />
+    <NavigationProperty Name="COMMANDE" Relationship="Self.FK_SURPLACE_COMMANDE" FromRole="SURPLACE" ToRole="COMMANDE" />
+  </EntityType>
+  <EntityType Name="TYPEBAR">
+    <Key>
+      <PropertyRef Name="ID_TYPE" />
+    </Key>
+    <Property Name="ID_TYPE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_TYPE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BARS" Relationship="Self.FK_BARS_TYPEBAR" FromRole="TYPEBAR" ToRole="BARS" />
+  </EntityType>
+  <Association Name="FK_AEMPORTER_CLIENTS">
+    <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="1" />
+    <End Role="AEMPORTER" Type="Self.AEMPORTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTS">
+        <PropertyRef Name="ID_USER" />
+      </Principal>
+      <Dependent Role="AEMPORTER">
+        <PropertyRef Name="ID_USER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AEMPORTER_COMMANDE">
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="1" />
+    <End Role="AEMPORTER" Type="Self.AEMPORTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMMANDE">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Principal>
+      <Dependent Role="AEMPORTER">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AEMPORTER_COMMANDE1">
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="1" />
+    <End Role="AEMPORTER" Type="Self.AEMPORTER" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="COMMANDE">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Principal>
+      <Dependent Role="AEMPORTER">
+        <PropertyRef Name="IDCOMMANDE_HER_1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BARMAN_BARS">
+    <End Role="BARS" Type="Self.BARS" Multiplicity="1" />
+    <End Role="BARMAN" Type="Self.BARMAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BARS">
+        <PropertyRef Name="ID_BAR" />
+      </Principal>
+      <Dependent Role="BARMAN">
+        <PropertyRef Name="ID_BAR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SURPLACE_BARMAN">
+    <End Role="BARMAN" Type="Self.BARMAN" Multiplicity="1" />
+    <End Role="SURPLACE" Type="Self.SURPLACE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BARMAN">
+        <PropertyRef Name="ID_USER" />
+      </Principal>
+      <Dependent Role="SURPLACE">
+        <PropertyRef Name="ID_USER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BARS_TYPEBAR">
+    <End Role="TYPEBAR" Type="Self.TYPEBAR" Multiplicity="1" />
+    <End Role="BARS" Type="Self.BARS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPEBAR">
+        <PropertyRef Name="ID_TYPE" />
+      </Principal>
+      <Dependent Role="BARS">
+        <PropertyRef Name="ID_TYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STOCKER_BARS">
+    <End Role="BARS" Type="Self.BARS" Multiplicity="1" />
+    <End Role="STOCKER" Type="Self.STOCKER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BARS">
+        <PropertyRef Name="ID_BAR" />
+      </Principal>
+      <Dependent Role="STOCKER">
+        <PropertyRef Name="ID_BAR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BOISSON_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="BOISSON" Type="Self.BOISSON" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="BOISSON">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COMPOSER_COMMANDE">
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="1" />
+    <End Role="COMPOSER" Type="Self.COMPOSER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMMANDE">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Principal>
+      <Dependent Role="COMPOSER">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SURPLACE_COMMANDE">
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="1" />
+    <End Role="SURPLACE" Type="Self.SURPLACE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="COMMANDE">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Principal>
+      <Dependent Role="SURPLACE">
+        <PropertyRef Name="IDCOMMANDE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COMPOSER_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="COMPOSER" Type="Self.COMPOSER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="COMPOSER">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOURRITURE_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="NOURRITURE" Type="Self.NOURRITURE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="NOURRITURE">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STOCKER_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="STOCKER" Type="Self.STOCKER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="STOCKER">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CATEGORISER">
+    <End Role="ALLERGENE" Type="Self.ALLERGENE" Multiplicity="*" />
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="*" />
+  </Association>
+  <Association Name="RECOIS">
+    <End Role="BARS" Type="Self.BARS" Multiplicity="*" />
+    <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="riledhouEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AEMPORTER" EntityType="Self.AEMPORTER" />
+    <EntitySet Name="ALLERGENE" EntityType="Self.ALLERGENE" />
+    <EntitySet Name="BARMAN" EntityType="Self.BARMAN" />
+    <EntitySet Name="BARS" EntityType="Self.BARS" />
+    <EntitySet Name="BOISSON" EntityType="Self.BOISSON" />
+    <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" />
+    <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
+    <EntitySet Name="COMPOSER" EntityType="Self.COMPOSER" />
+    <EntitySet Name="NOURRITURE" EntityType="Self.NOURRITURE" />
+    <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" />
+    <EntitySet Name="STOCKER" EntityType="Self.STOCKER" />
+    <EntitySet Name="SURPLACE" EntityType="Self.SURPLACE" />
+    <EntitySet Name="TYPEBAR" EntityType="Self.TYPEBAR" />
+    <AssociationSet Name="FK_AEMPORTER_CLIENTS" Association="Self.FK_AEMPORTER_CLIENTS">
+      <End Role="CLIENTS" EntitySet="CLIENTS" />
+      <End Role="AEMPORTER" EntitySet="AEMPORTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AEMPORTER_COMMANDE" Association="Self.FK_AEMPORTER_COMMANDE">
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+      <End Role="AEMPORTER" EntitySet="AEMPORTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AEMPORTER_COMMANDE1" Association="Self.FK_AEMPORTER_COMMANDE1">
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+      <End Role="AEMPORTER" EntitySet="AEMPORTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BARMAN_BARS" Association="Self.FK_BARMAN_BARS">
+      <End Role="BARS" EntitySet="BARS" />
+      <End Role="BARMAN" EntitySet="BARMAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SURPLACE_BARMAN" Association="Self.FK_SURPLACE_BARMAN">
+      <End Role="BARMAN" EntitySet="BARMAN" />
+      <End Role="SURPLACE" EntitySet="SURPLACE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BARS_TYPEBAR" Association="Self.FK_BARS_TYPEBAR">
+      <End Role="TYPEBAR" EntitySet="TYPEBAR" />
+      <End Role="BARS" EntitySet="BARS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STOCKER_BARS" Association="Self.FK_STOCKER_BARS">
+      <End Role="BARS" EntitySet="BARS" />
+      <End Role="STOCKER" EntitySet="STOCKER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BOISSON_PRODUIT" Association="Self.FK_BOISSON_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="BOISSON" EntitySet="BOISSON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COMPOSER_COMMANDE" Association="Self.FK_COMPOSER_COMMANDE">
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+      <End Role="COMPOSER" EntitySet="COMPOSER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SURPLACE_COMMANDE" Association="Self.FK_SURPLACE_COMMANDE">
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+      <End Role="SURPLACE" EntitySet="SURPLACE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COMPOSER_PRODUIT" Association="Self.FK_COMPOSER_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="COMPOSER" EntitySet="COMPOSER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOURRITURE_PRODUIT" Association="Self.FK_NOURRITURE_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="NOURRITURE" EntitySet="NOURRITURE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STOCKER_PRODUIT" Association="Self.FK_STOCKER_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="STOCKER" EntitySet="STOCKER" />
+    </AssociationSet>
+    <AssociationSet Name="CATEGORISER" Association="Self.CATEGORISER">
+      <End Role="ALLERGENE" EntitySet="ALLERGENE" />
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+    </AssociationSet>
+    <AssociationSet Name="RECOIS" Association="Self.RECOIS">
+      <End Role="BARS" EntitySet="BARS" />
+      <End Role="COMMANDE" EntitySet="COMMANDE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

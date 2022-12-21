@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd9df401091b4220bc09e32ba3b2f807" Name="Diagram1">
+        <EntityTypeShape EntityType="riledhouModel.AEMPORTER" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.ALLERGENE" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.BARMAN" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.BARS" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.BOISSON" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.CLIENTS" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.COMMANDE" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.COMPOSER" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.NOURRITURE" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.PRODUIT" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.STOCKER" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.SURPLACE" Width="1.5" PointX="10.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.TYPEBAR" Width="1.5" PointX="3.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="riledhouModel.FK_AEMPORTER_CLIENTS" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_AEMPORTER_COMMANDE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_AEMPORTER_COMMANDE1" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_BARMAN_BARS" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_SURPLACE_BARMAN" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_BARS_TYPEBAR" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_STOCKER_BARS" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_BOISSON_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_COMPOSER_COMMANDE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_SURPLACE_COMMANDE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_COMPOSER_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_NOURRITURE_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_STOCKER_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.CATEGORISER" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.RECOIS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

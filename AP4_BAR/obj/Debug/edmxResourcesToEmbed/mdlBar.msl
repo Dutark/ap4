@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="riledhouModelStoreContainer" CdmEntityContainer="riledhouEntities">
+    <EntitySetMapping Name="AEMPORTER">
+      <EntityTypeMapping TypeName="riledhouModel.AEMPORTER">
+        <MappingFragment StoreEntitySet="AEMPORTER">
+          <ScalarProperty Name="IDCOMMANDE_HER_1" ColumnName="IDCOMMANDE_HER_1" />
+          <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
+          <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+          <ScalarProperty Name="HEURERETRAIT" ColumnName="HEURERETRAIT" />
+          <ScalarProperty Name="CODERETRAIT" ColumnName="CODERETRAIT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ALLERGENE">
+      <EntityTypeMapping TypeName="riledhouModel.ALLERGENE">
+        <MappingFragment StoreEntitySet="ALLERGENE">
+          <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
+          <ScalarProperty Name="LIBALLERGENE" ColumnName="LIBALLERGENE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BARMAN">
+      <EntityTypeMapping TypeName="riledhouModel.BARMAN">
+        <MappingFragment StoreEntitySet="BARMAN">
+          <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+          <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
+          <ScalarProperty Name="ESTDIRIGEANT" ColumnName="ESTDIRIGEANT" />
+          <ScalarProperty Name="DATE_ARRIVER" ColumnName="DATE_ARRIVER" />
+          <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+          <ScalarProperty Name="ESTBARMAN" ColumnName="ESTBARMAN" />
+          <ScalarProperty Name="NOM" ColumnName="NOM" />
+          <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+          <ScalarProperty Name="MDP" ColumnName="MDP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BARS">
+      <EntityTypeMapping TypeName="riledhouModel.BARS">
+        <MappingFragment StoreEntitySet="BARS">
+          <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
+          <ScalarProperty Name="ID_TYPE" ColumnName="ID_TYPE" />
+          <ScalarProperty Name="PHOTOBAR" ColumnName="PHOTOBAR" />
+          <ScalarProperty Name="NOMBAR" ColumnName="NOMBAR" />
+          <ScalarProperty Name="OUVERTURE" ColumnName="OUVERTURE" />
+          <ScalarProperty Name="FERMETURE" ColumnName="FERMETURE" />
+          <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BOISSON">
+      <EntityTypeMapping TypeName="riledhouModel.BOISSON">
+        <MappingFragment StoreEntitySet="BOISSON">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="ESTALCOOLISE" ColumnName="ESTALCOOLISE" />
+          <ScalarProperty Name="DEGREALCOOL" ColumnName="DEGREALCOOL" />
+          <ScalarProperty Name="VOLUME" ColumnName="VOLUME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTS">
+      <EntityTypeMapping TypeName="riledhouModel.CLIENTS">
+        <MappingFragment StoreEntitySet="CLIENTS">
+          <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+          <ScalarProperty Name="DATEINSCRIPTION" ColumnName="DATEINSCRIPTION" />
+          <ScalarProperty Name="NOM" ColumnName="NOM" />
+          <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+          <ScalarProperty Name="MDP" ColumnName="MDP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMMANDE">
+      <EntityTypeMapping TypeName="riledhouModel.COMMANDE">
+        <MappingFragment StoreEntitySet="COMMANDE">
+          <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
+          <ScalarProperty Name="HEURECOMMANDE" ColumnName="HEURECOMMANDE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMPOSER">
+      <EntityTypeMapping TypeName="riledhouModel.COMPOSER">
+        <MappingFragment StoreEntitySet="COMPOSER">
+          <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="QUANTITE" ColumnName="QUANTITE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOURRITURE">
+      <EntityTypeMapping TypeName="riledhouModel.NOURRITURE">
+        <MappingFragment StoreEntitySet="NOURRITURE">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="POIDS" ColumnName="POIDS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUIT">
+      <EntityTypeMapping TypeName="riledhouModel.PRODUIT">
+        <MappingFragment StoreEntitySet="PRODUIT">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STOCKER">
+      <EntityTypeMapping TypeName="riledhouModel.STOCKER">
+        <MappingFragment StoreEntitySet="STOCKER">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
+          <ScalarProperty Name="QUANTITESTOCK" ColumnName="QUANTITESTOCK" />
+          <ScalarProperty Name="PRIX" ColumnName="PRIX" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SURPLACE">
+      <EntityTypeMapping TypeName="riledhouModel.SURPLACE">
+        <MappingFragment StoreEntitySet="SURPLACE">
+          <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
+          <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+          <ScalarProperty Name="NUMTABLE" ColumnName="NUMTABLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPEBAR">
+      <EntityTypeMapping TypeName="riledhouModel.TYPEBAR">
+        <MappingFragment StoreEntitySet="TYPEBAR">
+          <ScalarProperty Name="ID_TYPE" ColumnName="ID_TYPE" />
+          <ScalarProperty Name="NOM_TYPE" ColumnName="NOM_TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CATEGORISER" TypeName="riledhouModel.CATEGORISER" StoreEntitySet="CATEGORISER">
+      <EndProperty Name="ALLERGENE">
+        <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
+      </EndProperty>
+      <EndProperty Name="PRODUIT">
+        <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RECOIS" TypeName="riledhouModel.RECOIS" StoreEntitySet="RECOIS">
+      <EndProperty Name="BARS">
+        <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
+      </EndProperty>
+      <EndProperty Name="COMMANDE">
+        <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
