@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="mdlBarStoreContainer" CdmEntityContainer="riledhouEntities">
+  <EntityContainerMapping StorageEntityContainer="riledhouModelStoreContainer" CdmEntityContainer="riledhouEntities">
     <EntitySetMapping Name="AEMPORTER">
-      <EntityTypeMapping TypeName="mdlBar.AEMPORTER">
+      <EntityTypeMapping TypeName="riledhouModel.AEMPORTER">
         <MappingFragment StoreEntitySet="AEMPORTER">
           <ScalarProperty Name="IDCOMMANDE_HER_1" ColumnName="IDCOMMANDE_HER_1" />
           <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
@@ -13,7 +13,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ALLERGENE">
-      <EntityTypeMapping TypeName="mdlBar.ALLERGENE">
+      <EntityTypeMapping TypeName="riledhouModel.ALLERGENE">
         <MappingFragment StoreEntitySet="ALLERGENE">
           <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
           <ScalarProperty Name="LIBALLERGENE" ColumnName="LIBALLERGENE" />
@@ -21,7 +21,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BARMAN">
-      <EntityTypeMapping TypeName="mdlBar.BARMAN">
+      <EntityTypeMapping TypeName="riledhouModel.BARMAN">
         <MappingFragment StoreEntitySet="BARMAN">
           <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
           <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
@@ -37,7 +37,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BARS">
-      <EntityTypeMapping TypeName="mdlBar.BARS">
+      <EntityTypeMapping TypeName="riledhouModel.BARS">
         <MappingFragment StoreEntitySet="BARS">
           <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
           <ScalarProperty Name="ID_TYPE" ColumnName="ID_TYPE" />
@@ -50,7 +50,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BOISSON">
-      <EntityTypeMapping TypeName="mdlBar.BOISSON">
+      <EntityTypeMapping TypeName="riledhouModel.BOISSON">
         <MappingFragment StoreEntitySet="BOISSON">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="ESTALCOOLISE" ColumnName="ESTALCOOLISE" />
@@ -59,8 +59,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORISER">
+      <EntityTypeMapping TypeName="riledhouModel.CATEGORISER">
+        <MappingFragment StoreEntitySet="CATEGORISER">
+          <ScalarProperty Name="IDALLERGENE" ColumnName="IDALLERGENE" />
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CLIENTS">
-      <EntityTypeMapping TypeName="mdlBar.CLIENTS">
+      <EntityTypeMapping TypeName="riledhouModel.CLIENTS">
         <MappingFragment StoreEntitySet="CLIENTS">
           <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
           <ScalarProperty Name="created_at" ColumnName="created_at" />
@@ -72,7 +81,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="COMMANDE">
-      <EntityTypeMapping TypeName="mdlBar.COMMANDE">
+      <EntityTypeMapping TypeName="riledhouModel.COMMANDE">
         <MappingFragment StoreEntitySet="COMMANDE">
           <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
           <ScalarProperty Name="HEURECOMMANDE" ColumnName="HEURECOMMANDE" />
@@ -80,7 +89,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="COMPOSER">
-      <EntityTypeMapping TypeName="mdlBar.COMPOSER">
+      <EntityTypeMapping TypeName="riledhouModel.COMPOSER">
         <MappingFragment StoreEntitySet="COMPOSER">
           <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
@@ -89,7 +98,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="failed_jobs">
-      <EntityTypeMapping TypeName="mdlBar.failed_jobs">
+      <EntityTypeMapping TypeName="riledhouModel.failed_jobs">
         <MappingFragment StoreEntitySet="failed_jobs">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="uuid" ColumnName="uuid" />
@@ -102,7 +111,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="migrations">
-      <EntityTypeMapping TypeName="mdlBar.migrations">
+      <EntityTypeMapping TypeName="riledhouModel.migrations">
         <MappingFragment StoreEntitySet="migrations">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="migration" ColumnName="migration" />
@@ -111,7 +120,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NOURRITURE">
-      <EntityTypeMapping TypeName="mdlBar.NOURRITURE">
+      <EntityTypeMapping TypeName="riledhouModel.NOURRITURE">
         <MappingFragment StoreEntitySet="NOURRITURE">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="POIDS" ColumnName="POIDS" />
@@ -119,7 +128,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="personal_access_tokens">
-      <EntityTypeMapping TypeName="mdlBar.personal_access_tokens">
+      <EntityTypeMapping TypeName="riledhouModel.personal_access_tokens">
         <MappingFragment StoreEntitySet="personal_access_tokens">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="tokenable_type" ColumnName="tokenable_type" />
@@ -135,7 +144,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRODUIT">
-      <EntityTypeMapping TypeName="mdlBar.PRODUIT">
+      <EntityTypeMapping TypeName="riledhouModel.PRODUIT">
         <MappingFragment StoreEntitySet="PRODUIT">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -143,7 +152,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="STOCKER">
-      <EntityTypeMapping TypeName="mdlBar.STOCKER">
+      <EntityTypeMapping TypeName="riledhouModel.STOCKER">
         <MappingFragment StoreEntitySet="STOCKER">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
@@ -153,7 +162,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SURPLACE">
-      <EntityTypeMapping TypeName="mdlBar.SURPLACE">
+      <EntityTypeMapping TypeName="riledhouModel.SURPLACE">
         <MappingFragment StoreEntitySet="SURPLACE">
           <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
           <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
@@ -162,7 +171,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TYPEBAR">
-      <EntityTypeMapping TypeName="mdlBar.TYPEBAR">
+      <EntityTypeMapping TypeName="riledhouModel.TYPEBAR">
         <MappingFragment StoreEntitySet="TYPEBAR">
           <ScalarProperty Name="ID_TYPE" ColumnName="ID_TYPE" />
           <ScalarProperty Name="NOM_TYPE" ColumnName="NOM_TYPE" />
@@ -170,7 +179,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="users">
-      <EntityTypeMapping TypeName="mdlBar.users">
+      <EntityTypeMapping TypeName="riledhouModel.users">
         <MappingFragment StoreEntitySet="users">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -184,7 +193,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="password_resets">
-      <EntityTypeMapping TypeName="mdlBar.password_resets">
+      <EntityTypeMapping TypeName="riledhouModel.password_resets">
         <MappingFragment StoreEntitySet="password_resets">
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="token" ColumnName="token" />
@@ -193,7 +202,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="view_boisson_alcool">
-      <EntityTypeMapping TypeName="mdlBar.view_boisson_alcool">
+      <EntityTypeMapping TypeName="riledhouModel.view_boisson_alcool">
         <MappingFragment StoreEntitySet="view_boisson_alcool">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -210,13 +219,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="view_boisson_sans_alcool">
-      <EntityTypeMapping TypeName="mdlBar.view_boisson_sans_alcool">
+      <EntityTypeMapping TypeName="riledhouModel.view_boisson_sans_alcool">
         <MappingFragment StoreEntitySet="view_boisson_sans_alcool">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+          <ScalarProperty Name="VOLUME" ColumnName="VOLUME" />
+          <ScalarProperty Name="ESTALCOOLISE" ColumnName="ESTALCOOLISE" />
           <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
           <ScalarProperty Name="NOMBAR" ColumnName="NOMBAR" />
-          <ScalarProperty Name="VOLUME" ColumnName="VOLUME" />
           <ScalarProperty Name="QUANTITESTOCK" ColumnName="QUANTITESTOCK" />
           <ScalarProperty Name="PRIX" ColumnName="PRIX" />
           <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
@@ -225,7 +235,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="view_boissons">
-      <EntityTypeMapping TypeName="mdlBar.view_boissons">
+      <EntityTypeMapping TypeName="riledhouModel.view_boissons">
         <MappingFragment StoreEntitySet="view_boissons">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -242,7 +252,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="view_nourriture">
-      <EntityTypeMapping TypeName="mdlBar.view_nourriture">
+      <EntityTypeMapping TypeName="riledhouModel.view_nourriture">
         <MappingFragment StoreEntitySet="view_nourriture">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
           <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -257,14 +267,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="view_produit_serveur">
-      <EntityTypeMapping TypeName="mdlBar.view_produit_serveur">
+      <EntityTypeMapping TypeName="riledhouModel.view_produit_serveur">
         <MappingFragment StoreEntitySet="view_produit_serveur">
           <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="view_stat_produit">
-      <EntityTypeMapping TypeName="mdlBar.view_stat_produit">
+      <EntityTypeMapping TypeName="riledhouModel.view_stat_produit">
         <MappingFragment StoreEntitySet="view_stat_produit">
           <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
           <ScalarProperty Name="NOMBAR" ColumnName="NOMBAR" />
@@ -274,15 +284,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CATEGORISER" TypeName="mdlBar.CATEGORISER" StoreEntitySet="CATEGORISER">
-      <EndProperty Name="ALLERGENE">
-        <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
-      </EndProperty>
-      <EndProperty Name="PRODUIT">
-        <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="RECOIS" TypeName="mdlBar.RECOIS" StoreEntitySet="RECOIS">
+    <EntitySetMapping Name="view_stats_commande_emporter_plus">
+      <EntityTypeMapping TypeName="riledhouModel.view_stats_commande_emporter_plus">
+        <MappingFragment StoreEntitySet="view_stats_commande_emporter_plus">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_stats_commande_surplace_plus">
+      <EntityTypeMapping TypeName="riledhouModel.view_stats_commande_surplace_plus">
+        <MappingFragment StoreEntitySet="view_stats_commande_surplace_plus">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RECOIS" TypeName="riledhouModel.RECOIS" StoreEntitySet="RECOIS">
       <EndProperty Name="BARS">
         <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
       </EndProperty>

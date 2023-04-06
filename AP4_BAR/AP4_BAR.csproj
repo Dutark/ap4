@@ -98,6 +98,9 @@
     <Compile Include="BOISSON.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
+    <Compile Include="CATEGORISER.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
     <Compile Include="CLIENTS.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
@@ -222,6 +225,12 @@
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
     <Compile Include="view_produit_serveur.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_stats_commande_emporter_plus.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_stats_commande_surplace_plus.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
     <Compile Include="view_stat_produit.cs">

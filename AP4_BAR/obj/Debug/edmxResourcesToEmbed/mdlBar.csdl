@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="mdlBar" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="riledhouModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AEMPORTER">
     <Key>
       <PropertyRef Name="IDCOMMANDE_HER_1" />
@@ -19,7 +19,7 @@
     </Key>
     <Property Name="ID_ALLERGENE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PRODUIT" Relationship="Self.CATEGORISER" FromRole="ALLERGENE" ToRole="PRODUIT" />
+    <NavigationProperty Name="CATEGORISER" Relationship="Self.FK_CATEGORISER_ALLERGENE" FromRole="ALLERGENE" ToRole="CATEGORISER" />
   </EntityType>
   <EntityType Name="BARMAN">
     <Key>
@@ -63,6 +63,16 @@
     <Property Name="DEGREALCOOL" Type="Int64" />
     <Property Name="VOLUME" Type="Int64" />
     <NavigationProperty Name="PRODUIT" Relationship="Self.FK_BOISSON_PRODUIT" FromRole="BOISSON" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="CATEGORISER">
+    <Key>
+      <PropertyRef Name="IDALLERGENE" />
+    </Key>
+    <Property Name="IDALLERGENE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="ID_ALLERGENE" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ALLERGENE" Relationship="Self.FK_CATEGORISER_ALLERGENE" FromRole="CATEGORISER" ToRole="ALLERGENE" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_CATEGORISER_PRODUIT" FromRole="CATEGORISER" ToRole="PRODUIT" />
   </EntityType>
   <EntityType Name="CLIENTS">
     <Key>
@@ -148,10 +158,10 @@
     <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="BOISSON" Relationship="Self.FK_BOISSON_PRODUIT" FromRole="PRODUIT" ToRole="BOISSON" />
+    <NavigationProperty Name="CATEGORISER" Relationship="Self.FK_CATEGORISER_PRODUIT" FromRole="PRODUIT" ToRole="CATEGORISER" />
     <NavigationProperty Name="COMPOSER" Relationship="Self.FK_COMPOSER_PRODUIT" FromRole="PRODUIT" ToRole="COMPOSER" />
     <NavigationProperty Name="NOURRITURE" Relationship="Self.FK_NOURRITURE_PRODUIT" FromRole="PRODUIT" ToRole="NOURRITURE" />
     <NavigationProperty Name="STOCKER" Relationship="Self.FK_STOCKER_PRODUIT" FromRole="PRODUIT" ToRole="STOCKER" />
-    <NavigationProperty Name="ALLERGENE" Relationship="Self.CATEGORISER" FromRole="PRODUIT" ToRole="ALLERGENE" />
   </EntityType>
   <EntityType Name="STOCKER">
     <Key>
@@ -230,9 +240,10 @@
     </Key>
     <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
     <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="VOLUME" Type="Int64" />
+    <Property Name="ESTALCOOLISE" Type="Boolean" />
     <Property Name="ID_BAR" Type="Int32" Nullable="false" />
     <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="VOLUME" Type="Int64" />
     <Property Name="QUANTITESTOCK" Type="Int64" />
     <Property Name="PRIX" Type="Int64" />
     <Property Name="ID_ALLERGENE" Type="Int32" />
@@ -288,6 +299,22 @@
     <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="somme" Type="Decimal" />
   </EntityType>
+  <EntityType Name="view_stats_commande_emporter_plus">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="total" Type="Decimal" />
+  </EntityType>
+  <EntityType Name="view_stats_commande_surplace_plus">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="total" Type="Decimal" />
+  </EntityType>
   <Association Name="AEMPORTER_ibfk_1">
     <End Role="users" Type="Self.users" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -323,6 +350,18 @@
       </Principal>
       <Dependent Role="AEMPORTER">
         <PropertyRef Name="IDCOMMANDE_HER_1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CATEGORISER_ALLERGENE">
+    <End Role="ALLERGENE" Type="Self.ALLERGENE" Multiplicity="1" />
+    <End Role="CATEGORISER" Type="Self.CATEGORISER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ALLERGENE">
+        <PropertyRef Name="ID_ALLERGENE" />
+      </Principal>
+      <Dependent Role="CATEGORISER">
+        <PropertyRef Name="ID_ALLERGENE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -384,6 +423,18 @@
         <PropertyRef Name="ID_PRODUIT" />
       </Principal>
       <Dependent Role="BOISSON">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CATEGORISER_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="CATEGORISER" Type="Self.CATEGORISER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="CATEGORISER">
         <PropertyRef Name="ID_PRODUIT" />
       </Dependent>
     </ReferentialConstraint>
@@ -450,10 +501,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CATEGORISER">
-    <End Role="ALLERGENE" Type="Self.ALLERGENE" Multiplicity="*" />
-    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="*" />
-  </Association>
   <Association Name="RECOIS">
     <End Role="BARS" Type="Self.BARS" Multiplicity="*" />
     <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
@@ -464,6 +511,7 @@
     <EntitySet Name="BARMAN" EntityType="Self.BARMAN" />
     <EntitySet Name="BARS" EntityType="Self.BARS" />
     <EntitySet Name="BOISSON" EntityType="Self.BOISSON" />
+    <EntitySet Name="CATEGORISER" EntityType="Self.CATEGORISER" />
     <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" />
     <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
     <EntitySet Name="COMPOSER" EntityType="Self.COMPOSER" />
@@ -483,6 +531,8 @@
     <EntitySet Name="view_nourriture" EntityType="Self.view_nourriture" />
     <EntitySet Name="view_produit_serveur" EntityType="Self.view_produit_serveur" />
     <EntitySet Name="view_stat_produit" EntityType="Self.view_stat_produit" />
+    <EntitySet Name="view_stats_commande_emporter_plus" EntityType="Self.view_stats_commande_emporter_plus" />
+    <EntitySet Name="view_stats_commande_surplace_plus" EntityType="Self.view_stats_commande_surplace_plus" />
     <AssociationSet Name="AEMPORTER_ibfk_1" Association="Self.AEMPORTER_ibfk_1">
       <End Role="users" EntitySet="users" />
       <End Role="AEMPORTER" EntitySet="AEMPORTER" />
@@ -494,6 +544,10 @@
     <AssociationSet Name="FK_AEMPORTER_COMMANDE1" Association="Self.FK_AEMPORTER_COMMANDE1">
       <End Role="COMMANDE" EntitySet="COMMANDE" />
       <End Role="AEMPORTER" EntitySet="AEMPORTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CATEGORISER_ALLERGENE" Association="Self.FK_CATEGORISER_ALLERGENE">
+      <End Role="ALLERGENE" EntitySet="ALLERGENE" />
+      <End Role="CATEGORISER" EntitySet="CATEGORISER" />
     </AssociationSet>
     <AssociationSet Name="FK_BARMAN_BARS" Association="Self.FK_BARMAN_BARS">
       <End Role="BARS" EntitySet="BARS" />
@@ -515,6 +569,10 @@
       <End Role="PRODUIT" EntitySet="PRODUIT" />
       <End Role="BOISSON" EntitySet="BOISSON" />
     </AssociationSet>
+    <AssociationSet Name="FK_CATEGORISER_PRODUIT" Association="Self.FK_CATEGORISER_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="CATEGORISER" EntitySet="CATEGORISER" />
+    </AssociationSet>
     <AssociationSet Name="FK_COMPOSER_COMMANDE" Association="Self.FK_COMPOSER_COMMANDE">
       <End Role="COMMANDE" EntitySet="COMMANDE" />
       <End Role="COMPOSER" EntitySet="COMPOSER" />
@@ -534,10 +592,6 @@
     <AssociationSet Name="FK_STOCKER_PRODUIT" Association="Self.FK_STOCKER_PRODUIT">
       <End Role="PRODUIT" EntitySet="PRODUIT" />
       <End Role="STOCKER" EntitySet="STOCKER" />
-    </AssociationSet>
-    <AssociationSet Name="CATEGORISER" Association="Self.CATEGORISER">
-      <End Role="ALLERGENE" EntitySet="ALLERGENE" />
-      <End Role="PRODUIT" EntitySet="PRODUIT" />
     </AssociationSet>
     <AssociationSet Name="RECOIS" Association="Self.RECOIS">
       <End Role="BARS" EntitySet="BARS" />

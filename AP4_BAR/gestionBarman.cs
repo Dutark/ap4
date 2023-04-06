@@ -32,19 +32,19 @@ namespace AP4_BAR
 
         private void btn_ajout_Click(object sender, EventArgs e)
         {
-            string nom, prenom, mail, mdp;
+            string nom, prenom, mail, passwordHash;
             bool estDirigeant = false;
             DateTime dateA;
             nom = tbNom.Text;
             prenom = tbPrenom.Text;
             mail = tbMail.Text;
-            mdp = tbMdp.Text;
+            passwordHash = BCrypt.Net.BCrypt.HashPassword(tbMdp.Text);
             dateA = dtArriver.Value;
 
             estDirigeant = cbOui.Checked;
 
 
-            if (Modele.Ajoutbarman(idBar, estDirigeant ,nom, prenom, mail, mdp, dateA))
+            if (Modele.Ajoutbarman(idBar, estDirigeant ,nom, prenom, mail, passwordHash, dateA))
             {
                 MessageBox.Show("Barman ajouté " + Modele.RetourneDernierBarmanSaisi());
                 Annuler();
@@ -52,6 +52,16 @@ namespace AP4_BAR
         }
 
         private void tbNom_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbOui_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gestionBarman_Load(object sender, EventArgs e)
         {
 
         }

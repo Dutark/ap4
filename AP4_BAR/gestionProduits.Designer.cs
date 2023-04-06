@@ -50,8 +50,12 @@ namespace AP4_BAR
             this.lbDegA = new System.Windows.Forms.Label();
             this.tbPoids = new System.Windows.Forms.TextBox();
             this.lbPoids = new System.Windows.Forms.Label();
+            this.cbAllergene = new System.Windows.Forms.CheckBox();
+            this.bsAllergene = new System.Windows.Forms.BindingSource(this.components);
+            this.cbNomAllergene = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTypeP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAllergene)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -231,11 +235,35 @@ namespace AP4_BAR
             this.lbPoids.TabIndex = 31;
             this.lbPoids.Text = "Poids du produit :";
             // 
+            // cbAllergene
+            // 
+            this.cbAllergene.AutoSize = true;
+            this.cbAllergene.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAllergene.Location = new System.Drawing.Point(447, 87);
+            this.cbAllergene.Name = "cbAllergene";
+            this.cbAllergene.Size = new System.Drawing.Size(109, 20);
+            this.cbAllergene.TabIndex = 33;
+            this.cbAllergene.Text = "Est allergène ";
+            this.cbAllergene.UseVisualStyleBackColor = true;
+            this.cbAllergene.CheckedChanged += new System.EventHandler(this.cbAllergene_CheckedChanged);
+            // 
+            // cbNomAllergene
+            // 
+            this.cbNomAllergene.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNomAllergene.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbNomAllergene.FormattingEnabled = true;
+            this.cbNomAllergene.Location = new System.Drawing.Point(562, 85);
+            this.cbNomAllergene.Name = "cbNomAllergene";
+            this.cbNomAllergene.Size = new System.Drawing.Size(133, 24);
+            this.cbNomAllergene.TabIndex = 34;
+            // 
             // gestionProduits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 409);
+            this.Controls.Add(this.cbNomAllergene);
+            this.Controls.Add(this.cbAllergene);
             this.Controls.Add(this.tbPoids);
             this.Controls.Add(this.lbPoids);
             this.Controls.Add(this.tbVol);
@@ -260,6 +288,7 @@ namespace AP4_BAR
             this.Load += new System.EventHandler(this.gestionProduits_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bsBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTypeP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAllergene)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,5 +316,8 @@ namespace AP4_BAR
         private System.Windows.Forms.TextBox tbPoids;
         private System.Windows.Forms.Label lbPoids;
         private System.Windows.Forms.Label lbDegA;
+        private System.Windows.Forms.CheckBox cbAllergene;
+        private System.Windows.Forms.BindingSource bsAllergene;
+        private System.Windows.Forms.ComboBox cbNomAllergene;
     }
 }

@@ -17,9 +17,9 @@ namespace AP4_BAR
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUIT()
         {
+            this.CATEGORISER = new HashSet<CATEGORISER>();
             this.COMPOSER = new HashSet<COMPOSER>();
             this.STOCKER = new HashSet<STOCKER>();
-            this.ALLERGENE = new HashSet<ALLERGENE>();
         }
     
         public int ID_PRODUIT { get; set; }
@@ -27,11 +27,11 @@ namespace AP4_BAR
     
         public virtual BOISSON BOISSON { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CATEGORISER> CATEGORISER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMPOSER> COMPOSER { get; set; }
         public virtual NOURRITURE NOURRITURE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STOCKER> STOCKER { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ALLERGENE> ALLERGENE { get; set; }
     }
 }

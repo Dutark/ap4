@@ -30,6 +30,7 @@ namespace AP4_BAR
         public virtual DbSet<BARMAN> BARMAN { get; set; }
         public virtual DbSet<BARS> BARS { get; set; }
         public virtual DbSet<BOISSON> BOISSON { get; set; }
+        public virtual DbSet<CATEGORISER> CATEGORISER { get; set; }
         public virtual DbSet<CLIENTS> CLIENTS { get; set; }
         public virtual DbSet<COMMANDE> COMMANDE { get; set; }
         public virtual DbSet<COMPOSER> COMPOSER { get; set; }
@@ -49,5 +50,7 @@ namespace AP4_BAR
         public virtual DbSet<view_nourriture> view_nourriture { get; set; }
         public virtual DbSet<view_produit_serveur> view_produit_serveur { get; set; }
         public virtual DbSet<view_stat_produit> view_stat_produit { get; set; }
+        public virtual DbSet<view_stats_commande_emporter_plus> view_stats_commande_emporter_plus { get; set; }
+        public virtual DbSet<view_stats_commande_surplace_plus> view_stats_commande_surplace_plus { get; set; }
     }
 }

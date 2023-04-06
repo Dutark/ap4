@@ -4,46 +4,50 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="395a4c30f05b4f1b86dad474a0458e13" Name="Diagram1">
-        <EntityTypeShape EntityType="mdlBar.AEMPORTER" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.ALLERGENE" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.BARMAN" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.BARS" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.BOISSON" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.CLIENTS" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.COMMANDE" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.COMPOSER" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.failed_jobs" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.migrations" Width="1.5" PointX="10.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.NOURRITURE" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.personal_access_tokens" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.PRODUIT" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.STOCKER" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.SURPLACE" Width="1.5" PointX="10.5" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.TYPEBAR" Width="1.5" PointX="3.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.users" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.password_resets" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.view_boisson_alcool" Width="1.5" PointX="12.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.view_boisson_sans_alcool" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.view_boissons" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.view_nourriture" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.view_produit_serveur" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mdlBar.view_stat_produit" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="mdlBar.AEMPORTER_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_AEMPORTER_COMMANDE" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_AEMPORTER_COMMANDE1" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_BARMAN_BARS" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_SURPLACE_BARMAN" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_BARS_TYPEBAR" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_STOCKER_BARS" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_BOISSON_PRODUIT" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_COMPOSER_COMMANDE" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_SURPLACE_COMMANDE" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_COMPOSER_PRODUIT" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_NOURRITURE_PRODUIT" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.FK_STOCKER_PRODUIT" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.CATEGORISER" ManuallyRouted="false" />
-        <AssociationConnector Association="mdlBar.RECOIS" ManuallyRouted="false" />
+      <Diagram DiagramId="2c6f23f1885a4717b69405b1c6bad389" Name="Diagram1">
+        <EntityTypeShape EntityType="riledhouModel.AEMPORTER" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.ALLERGENE" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.BARMAN" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.BARS" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.BOISSON" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.CATEGORISER" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.CLIENTS" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.COMMANDE" Width="1.5" PointX="3.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.COMPOSER" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.failed_jobs" Width="1.5" PointX="8.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.migrations" Width="1.5" PointX="10.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.NOURRITURE" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.personal_access_tokens" Width="1.5" PointX="10.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.PRODUIT" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.STOCKER" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.SURPLACE" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.TYPEBAR" Width="1.5" PointX="1.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.users" Width="1.5" PointX="3.75" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.password_resets" Width="1.5" PointX="10.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_boisson_alcool" Width="1.5" PointX="10.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_boisson_sans_alcool" Width="1.5" PointX="5.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_boissons" Width="1.5" PointX="7.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_nourriture" Width="1.5" PointX="12.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_produit_serveur" Width="1.5" PointX="2.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_stat_produit" Width="1.5" PointX="12.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_stats_commande_emporter_plus" Width="1.5" PointX="12.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="riledhouModel.view_stats_commande_surplace_plus" Width="1.5" PointX="12.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="riledhouModel.AEMPORTER_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_AEMPORTER_COMMANDE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_AEMPORTER_COMMANDE1" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_CATEGORISER_ALLERGENE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_BARMAN_BARS" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_SURPLACE_BARMAN" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_BARS_TYPEBAR" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_STOCKER_BARS" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_BOISSON_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_CATEGORISER_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_COMPOSER_COMMANDE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_SURPLACE_COMMANDE" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_COMPOSER_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_NOURRITURE_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.FK_STOCKER_PRODUIT" ManuallyRouted="false" />
+        <AssociationConnector Association="riledhouModel.RECOIS" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

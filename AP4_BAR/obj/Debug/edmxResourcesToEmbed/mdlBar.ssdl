@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="mdlBar.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="riledhouModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AEMPORTER">
     <Key>
       <PropertyRef Name="IDCOMMANDE_HER_1" />
@@ -55,9 +55,9 @@
   </EntityType>
   <EntityType Name="CATEGORISER">
     <Key>
-      <PropertyRef Name="ID_PRODUIT" />
-      <PropertyRef Name="ID_ALLERGENE" />
+      <PropertyRef Name="IDALLERGENE" />
     </Key>
+    <Property Name="IDALLERGENE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
     <Property Name="ID_ALLERGENE" Type="int" Nullable="false" />
   </EntityType>
@@ -222,9 +222,10 @@ avertissement 6002: La table/vue 'def.riledhou.view_boisson_sans_alcool' n'a pas
     </Key>
     <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
     <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="VOLUME" Type="bigint" />
+    <Property Name="ESTALCOOLISE" Type="bool" />
     <Property Name="ID_BAR" Type="int" Nullable="false" />
     <Property Name="NOMBAR" Type="char" MaxLength="32" />
-    <Property Name="VOLUME" Type="bigint" />
     <Property Name="QUANTITESTOCK" Type="bigint" />
     <Property Name="PRIX" Type="bigint" />
     <Property Name="ID_ALLERGENE" Type="int" />
@@ -287,6 +288,26 @@ avertissement 6002: La table/vue 'def.riledhou.view_stat_produit' n'a pas de cl�
     <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
     <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
     <Property Name="somme" Type="decimal" Precision="41" Scale="0" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_stats_commande_emporter_plus' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_stats_commande_emporter_plus">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="total" Type="decimal" Precision="41" Scale="0" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_stats_commande_surplace_plus' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_stats_commande_surplace_plus">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="total" Type="decimal" Precision="41" Scale="0" />
   </EntityType>
   <Association Name="AEMPORTER_ibfk_1">
     <End Role="users" Type="Self.users" Multiplicity="1">
@@ -498,7 +519,7 @@ avertissement 6002: La table/vue 'def.riledhou.view_stat_produit' n'a pas de cl�
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="mdlBarStoreContainer">
+  <EntityContainer Name="riledhouModelStoreContainer">
     <EntitySet Name="AEMPORTER" EntityType="Self.AEMPORTER" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="ALLERGENE" EntityType="Self.ALLERGENE" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="BARMAN" EntityType="Self.BARMAN" Schema="riledhou" store:Type="Tables" />
@@ -544,9 +565,10 @@ FROM `view_boisson_alcool` AS `view_boisson_alcool`</DefiningQuery>
       <DefiningQuery>SELECT
 `view_boisson_sans_alcool`.`ID_PRODUIT`, 
 `view_boisson_sans_alcool`.`NOM_PRODUIT`, 
+`view_boisson_sans_alcool`.`VOLUME`, 
+`view_boisson_sans_alcool`.`ESTALCOOLISE`, 
 `view_boisson_sans_alcool`.`ID_BAR`, 
 `view_boisson_sans_alcool`.`NOMBAR`, 
-`view_boisson_sans_alcool`.`VOLUME`, 
 `view_boisson_sans_alcool`.`QUANTITESTOCK`, 
 `view_boisson_sans_alcool`.`PRIX`, 
 `view_boisson_sans_alcool`.`ID_ALLERGENE`, 
@@ -594,6 +616,20 @@ FROM `view_produit_serveur` AS `view_produit_serveur`</DefiningQuery>
 `view_stat_produit`.`NOM_PRODUIT`, 
 `view_stat_produit`.`somme`
 FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_stats_commande_emporter_plus" EntityType="Self.view_stats_commande_emporter_plus" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_stats_commande_emporter_plus`.`ID_PRODUIT`, 
+`view_stats_commande_emporter_plus`.`NOM_PRODUIT`, 
+`view_stats_commande_emporter_plus`.`total`
+FROM `view_stats_commande_emporter_plus` AS `view_stats_commande_emporter_plus`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_stats_commande_surplace_plus" EntityType="Self.view_stats_commande_surplace_plus" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_stats_commande_surplace_plus`.`ID_PRODUIT`, 
+`view_stats_commande_surplace_plus`.`NOM_PRODUIT`, 
+`view_stats_commande_surplace_plus`.`total`
+FROM `view_stats_commande_surplace_plus` AS `view_stats_commande_surplace_plus`</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="AEMPORTER_ibfk_1" Association="Self.AEMPORTER_ibfk_1">
       <End Role="users" EntitySet="users" />

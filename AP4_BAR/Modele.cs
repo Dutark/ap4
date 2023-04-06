@@ -49,7 +49,11 @@ namespace AP4_BAR
         {
             return maConnexion.BARS.ToList();
         }
-        
+        public static List<ALLERGENE> listeAllergene()
+        {
+            return maConnexion.ALLERGENE.ToList();
+        }
+
 
         public static int verifDirigeant(string mail, string password)
         {
@@ -61,9 +65,9 @@ namespace AP4_BAR
             {
                 if (barman.ESTDIRIGEANT == true)
                 {
-                    if (barman.MAIL == mail && barman.MDP == passwordHash)
-                    {
-                        return barman.ID_BAR;
+                    if (barman.MAIL == mail && verified == true)
+                    {                      
+                        return barman.ID_BAR; 
                     }
                 }  
             }
@@ -181,6 +185,25 @@ namespace AP4_BAR
                 produit = new PRODUIT();
                 produit.NOM_PRODUIT = nomproduit;
                 maConnexion.PRODUIT.Add(produit);
+                maConnexion.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
+        public static bool AjoutAllergene(int idAllergene, int idProd)
+        {
+            CATEGORISER categoriser;
+            bool vretour = true;
+            try
+            {
+                categoriser = new CATEGORISER();
+                categoriser.ID_ALLERGENE = idAllergene;
+                categoriser.ID_PRODUIT = idProd;
+                maConnexion.CATEGORISER.Add(categoriser);
                 maConnexion.SaveChanges();
             }
             catch (Exception ex)

@@ -33,7 +33,7 @@ namespace AP4_BAR
             InitializeComponent();
             this.etat = etat;
             this.idBar = idBar;
-        
+            cbNomAllergene.Visible = false;
         }
 
         public void RemplirListeBar()
@@ -45,22 +45,33 @@ namespace AP4_BAR
             cbListeBar.SelectedIndex = -1;
         }
 
+        public void RemplirListeAllergene()
+        {
+            cbNomAllergene.ValueMember = "ID_ALLERGENE";
+            cbNomAllergene.DisplayMember = "LIBALLERGENE";
+            bsAllergene.DataSource = Modele.listeAllergene();
+            cbNomAllergene.DataSource = bsAllergene;
+            cbNomAllergene.SelectedIndex = -1;
+        }
+
         private void gestionProduits_Load(object sender, EventArgs e)
         {
             RemplirListeBar();
+            RemplirListeAllergene();
             if (etat == EtatGestion.Create) // cas etat create
             {
                 btn_ajout.Text = "AJOUTER";
                 
                 lbType.Visible = true; 
-                lbNomProd.Visible = false; 
+                lbNomProd.Visible = false;
+                cbAllergene.Visible = false;
                 lbNomBar.Visible = false; 
                 lbQte.Visible = false; 
                 lbPrix.Visible = false; 
                 lbDegA.Visible = false; 
                 lbVol.Visible = false;
                 lbPoids.Visible = false;
-
+                
 
                 tbProduit.Visible = false;
                 cbListeBar.Visible = false;
@@ -72,8 +83,7 @@ namespace AP4_BAR
                 tbVol.Visible = false;
                 tbPoids.Visible = false;
                 cbListeBar.SelectedValue = idBar;
-            }
-          
+            }    
         }
 
         private void Annuler()
@@ -85,15 +95,14 @@ namespace AP4_BAR
 
         private void Button_Click(object sender, EventArgs e)
         {
-            int idproduit, qte, prix, degreAlcool, volume, poids;
+            int idproduit, qte, prix, degreAlcool, volume, poids, idAllergene;
             string nomProd;
             bool estAlcoolise;
 
             nomProd = tbProduit.Text;
             qte = Convert.ToInt32(tbQte.Text);
             prix = Convert.ToInt32(tbPrix.Text);
-            
-            
+            idAllergene = Convert.ToInt32(cbNomAllergene.SelectedValue);
             estAlcoolise = true;
 
 
@@ -118,12 +127,10 @@ namespace AP4_BAR
 
                 if (Modele.Ajoutproduit(nomProd))
                 {
-                    MessageBox.Show("Produit global ajouté " + Modele.RetourneDernierProduitSaisi());
                     idproduit = Modele.RetourneDernierProduitSaisi();
 
                     if (Modele.AjoutPRODUIT(idproduit, idBar, qte, prix))
                     {
-                        MessageBox.Show("Produit dans votre bar ajouté en stock " + idproduit);
 
                         if (type == TypeProduit.BoissonAlcoolisé)
                         {
@@ -131,7 +138,10 @@ namespace AP4_BAR
                             volume = Convert.ToInt32(tbVol.Text);
                             if (Modele.AjoutproduitAlcoolise(idproduit, true, degreAlcool, volume))
                             {
-                                MessageBox.Show("Produit alcoolisé ajouté " + idproduit);
+                                if (Modele.AjoutAllergene(idAllergene, idproduit))
+                                {
+                                    MessageBox.Show("Produit alcoolisé ajouté " + idproduit);
+                                }                               
                             }
                         }
 
@@ -140,7 +150,10 @@ namespace AP4_BAR
                             volume = Convert.ToInt32(tbVol.Text);
                             if (Modele.AjoutproduitSoft(idproduit, false, volume))
                             {
-                                MessageBox.Show("Produit soft ajouté " + idproduit);
+                                if (Modele.AjoutAllergene(idAllergene, idproduit))
+                                {
+                                    MessageBox.Show("Produit soft ajouté " + idproduit);
+                                }
                             }
                         }
 
@@ -149,7 +162,10 @@ namespace AP4_BAR
                             poids = Convert.ToInt32(tbPoids.Text);
                             if (Modele.AjoutproduitNourriture(idproduit, poids))
                             {
-                                MessageBox.Show("Produit nourriture ajouté " + idproduit);
+                                if (Modele.AjoutAllergene(idAllergene, idproduit))
+                                {
+                                    MessageBox.Show("Nourriture ajouté " + idproduit);
+                                }
                             }
 
                         }
@@ -181,6 +197,7 @@ namespace AP4_BAR
                 btn_ajout.Text = "AJOUTER";
                 lbType.Visible = true;
                 lbNomProd.Visible = true;
+                cbAllergene.Visible = true;
                 lbNomBar.Visible = true;
                 lbQte.Visible = true;
                 lbPrix.Visible = true;
@@ -206,6 +223,7 @@ namespace AP4_BAR
                 btn_ajout.Text = "AJOUTER";
                 lbType.Visible = true;
                 lbNomProd.Visible = true;
+                cbAllergene.Visible = true;
                 lbNomBar.Visible = true;
                 lbQte.Visible = true;
                 lbPrix.Visible = true;
@@ -231,6 +249,7 @@ namespace AP4_BAR
                 btn_ajout.Text = "AJOUTER";
                 lbType.Visible = true;
                 lbNomProd.Visible = true;
+                cbAllergene.Visible = true;
                 lbNomBar.Visible = true;
                 lbQte.Visible = true;
                 lbPrix.Visible = true;
@@ -251,6 +270,11 @@ namespace AP4_BAR
                 cbListeBar.SelectedValue = idBar;
             }
 
+        }
+
+        private void cbAllergene_CheckedChanged(object sender, EventArgs e)
+        {
+            cbNomAllergene.Visible = true;
         }
     }
 }

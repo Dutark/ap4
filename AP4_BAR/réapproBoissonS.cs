@@ -37,7 +37,6 @@ namespace AP4_BAR
             List<view_boisson_sans_alcool> lesP = new List<view_boisson_sans_alcool>();
             List<view_boisson_sans_alcool> lesPAffiche = new List<view_boisson_sans_alcool>();
             lesP = Modele.listeProduitSo();
-            // REFAIRE LES VUES
             foreach (view_boisson_sans_alcool s in lesP)
             {
                 if (s.ID_BAR == idBar)

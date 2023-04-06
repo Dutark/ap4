@@ -17,13 +17,13 @@ namespace AP4_BAR
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ALLERGENE()
         {
-            this.PRODUIT = new HashSet<PRODUIT>();
+            this.CATEGORISER = new HashSet<CATEGORISER>();
         }
     
         public int ID_ALLERGENE { get; set; }
         public string LIBALLERGENE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUIT> PRODUIT { get; set; }
+        public virtual ICollection<CATEGORISER> CATEGORISER { get; set; }
     }
 }

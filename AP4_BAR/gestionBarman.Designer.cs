@@ -174,6 +174,7 @@ namespace AP4_BAR
             this.cbOui.TabIndex = 20;
             this.cbOui.Text = "Oui";
             this.cbOui.UseVisualStyleBackColor = true;
+            this.cbOui.CheckedChanged += new System.EventHandler(this.cbOui_CheckedChanged);
             // 
             // gestionBarman
             // 
@@ -197,6 +198,7 @@ namespace AP4_BAR
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "gestionBarman";
             this.Text = "gestionBarman";
+            this.Load += new System.EventHandler(this.gestionBarman_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

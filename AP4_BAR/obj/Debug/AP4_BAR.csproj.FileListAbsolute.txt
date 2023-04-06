@@ -50,4 +50,3 @@ C:\Lycée\AP4\AP4 C#\ap4\AP4_BAR\obj\Debug\AP4_BAR.csproj.CoreCompileInputs.cach
 C:\Lycée\AP4\AP4 C#\ap4\AP4_BAR\obj\Debug\AP4_BAR.csproj.CopyComplete
 C:\Lycée\AP4\AP4 C#\ap4\AP4_BAR\obj\Debug\AP4_BAR.exe
 C:\Lycée\AP4\AP4 C#\ap4\AP4_BAR\obj\Debug\AP4_BAR.pdb
-C:\Lycée\AP4\AP4 C#\ap4\AP4_BAR\obj\Debug\AP4_BAR.csproj.AssemblyReference.cache

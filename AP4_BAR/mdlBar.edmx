@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="mdlBar.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="riledhouModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AEMPORTER">
           <Key>
             <PropertyRef Name="IDCOMMANDE_HER_1" />
@@ -60,9 +60,9 @@
         </EntityType>
         <EntityType Name="CATEGORISER">
           <Key>
-            <PropertyRef Name="ID_PRODUIT" />
-            <PropertyRef Name="ID_ALLERGENE" />
+            <PropertyRef Name="IDALLERGENE" />
           </Key>
+          <Property Name="IDALLERGENE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
           <Property Name="ID_ALLERGENE" Type="int" Nullable="false" />
         </EntityType>
@@ -227,9 +227,10 @@ avertissement 6002: La table/vue 'def.riledhou.view_boisson_sans_alcool' n'a pas
           </Key>
           <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
           <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+          <Property Name="VOLUME" Type="bigint" />
+          <Property Name="ESTALCOOLISE" Type="bool" />
           <Property Name="ID_BAR" Type="int" Nullable="false" />
           <Property Name="NOMBAR" Type="char" MaxLength="32" />
-          <Property Name="VOLUME" Type="bigint" />
           <Property Name="QUANTITESTOCK" Type="bigint" />
           <Property Name="PRIX" Type="bigint" />
           <Property Name="ID_ALLERGENE" Type="int" />
@@ -292,6 +293,26 @@ avertissement 6002: La table/vue 'def.riledhou.view_stat_produit' n'a pas de cl�
           <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
           <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
           <Property Name="somme" Type="decimal" Precision="41" Scale="0" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_stats_commande_emporter_plus' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="view_stats_commande_emporter_plus">
+          <Key>
+            <PropertyRef Name="ID_PRODUIT" />
+          </Key>
+          <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+          <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+          <Property Name="total" Type="decimal" Precision="41" Scale="0" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_stats_commande_surplace_plus' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="view_stats_commande_surplace_plus">
+          <Key>
+            <PropertyRef Name="ID_PRODUIT" />
+          </Key>
+          <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+          <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+          <Property Name="total" Type="decimal" Precision="41" Scale="0" />
         </EntityType>
         <Association Name="AEMPORTER_ibfk_1">
           <End Role="users" Type="Self.users" Multiplicity="1">
@@ -503,7 +524,7 @@ avertissement 6002: La table/vue 'def.riledhou.view_stat_produit' n'a pas de cl�
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="mdlBarStoreContainer">
+        <EntityContainer Name="riledhouModelStoreContainer">
           <EntitySet Name="AEMPORTER" EntityType="Self.AEMPORTER" Schema="riledhou" store:Type="Tables" />
           <EntitySet Name="ALLERGENE" EntityType="Self.ALLERGENE" Schema="riledhou" store:Type="Tables" />
           <EntitySet Name="BARMAN" EntityType="Self.BARMAN" Schema="riledhou" store:Type="Tables" />
@@ -549,9 +570,10 @@ FROM `view_boisson_alcool` AS `view_boisson_alcool`</DefiningQuery>
             <DefiningQuery>SELECT
 `view_boisson_sans_alcool`.`ID_PRODUIT`, 
 `view_boisson_sans_alcool`.`NOM_PRODUIT`, 
+`view_boisson_sans_alcool`.`VOLUME`, 
+`view_boisson_sans_alcool`.`ESTALCOOLISE`, 
 `view_boisson_sans_alcool`.`ID_BAR`, 
 `view_boisson_sans_alcool`.`NOMBAR`, 
-`view_boisson_sans_alcool`.`VOLUME`, 
 `view_boisson_sans_alcool`.`QUANTITESTOCK`, 
 `view_boisson_sans_alcool`.`PRIX`, 
 `view_boisson_sans_alcool`.`ID_ALLERGENE`, 
@@ -599,6 +621,20 @@ FROM `view_produit_serveur` AS `view_produit_serveur`</DefiningQuery>
 `view_stat_produit`.`NOM_PRODUIT`, 
 `view_stat_produit`.`somme`
 FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_stats_commande_emporter_plus" EntityType="Self.view_stats_commande_emporter_plus" store:Type="Views" store:Schema="riledhou">
+            <DefiningQuery>SELECT
+`view_stats_commande_emporter_plus`.`ID_PRODUIT`, 
+`view_stats_commande_emporter_plus`.`NOM_PRODUIT`, 
+`view_stats_commande_emporter_plus`.`total`
+FROM `view_stats_commande_emporter_plus` AS `view_stats_commande_emporter_plus`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_stats_commande_surplace_plus" EntityType="Self.view_stats_commande_surplace_plus" store:Type="Views" store:Schema="riledhou">
+            <DefiningQuery>SELECT
+`view_stats_commande_surplace_plus`.`ID_PRODUIT`, 
+`view_stats_commande_surplace_plus`.`NOM_PRODUIT`, 
+`view_stats_commande_surplace_plus`.`total`
+FROM `view_stats_commande_surplace_plus` AS `view_stats_commande_surplace_plus`</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="AEMPORTER_ibfk_1" Association="Self.AEMPORTER_ibfk_1">
             <End Role="users" EntitySet="users" />
@@ -673,7 +709,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="mdlBar" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="riledhouModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AEMPORTER">
           <Key>
             <PropertyRef Name="IDCOMMANDE_HER_1" />
@@ -693,7 +729,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           </Key>
           <Property Name="ID_ALLERGENE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PRODUIT" Relationship="Self.CATEGORISER" FromRole="ALLERGENE" ToRole="PRODUIT" />
+          <NavigationProperty Name="CATEGORISER" Relationship="Self.FK_CATEGORISER_ALLERGENE" FromRole="ALLERGENE" ToRole="CATEGORISER" />
         </EntityType>
         <EntityType Name="BARMAN">
           <Key>
@@ -737,6 +773,16 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           <Property Name="DEGREALCOOL" Type="Int64" />
           <Property Name="VOLUME" Type="Int64" />
           <NavigationProperty Name="PRODUIT" Relationship="Self.FK_BOISSON_PRODUIT" FromRole="BOISSON" ToRole="PRODUIT" />
+        </EntityType>
+        <EntityType Name="CATEGORISER">
+          <Key>
+            <PropertyRef Name="IDALLERGENE" />
+          </Key>
+          <Property Name="IDALLERGENE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+          <Property Name="ID_ALLERGENE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ALLERGENE" Relationship="Self.FK_CATEGORISER_ALLERGENE" FromRole="CATEGORISER" ToRole="ALLERGENE" />
+          <NavigationProperty Name="PRODUIT" Relationship="Self.FK_CATEGORISER_PRODUIT" FromRole="CATEGORISER" ToRole="PRODUIT" />
         </EntityType>
         <EntityType Name="CLIENTS">
           <Key>
@@ -822,10 +868,10 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BOISSON" Relationship="Self.FK_BOISSON_PRODUIT" FromRole="PRODUIT" ToRole="BOISSON" />
+          <NavigationProperty Name="CATEGORISER" Relationship="Self.FK_CATEGORISER_PRODUIT" FromRole="PRODUIT" ToRole="CATEGORISER" />
           <NavigationProperty Name="COMPOSER" Relationship="Self.FK_COMPOSER_PRODUIT" FromRole="PRODUIT" ToRole="COMPOSER" />
           <NavigationProperty Name="NOURRITURE" Relationship="Self.FK_NOURRITURE_PRODUIT" FromRole="PRODUIT" ToRole="NOURRITURE" />
           <NavigationProperty Name="STOCKER" Relationship="Self.FK_STOCKER_PRODUIT" FromRole="PRODUIT" ToRole="STOCKER" />
-          <NavigationProperty Name="ALLERGENE" Relationship="Self.CATEGORISER" FromRole="PRODUIT" ToRole="ALLERGENE" />
         </EntityType>
         <EntityType Name="STOCKER">
           <Key>
@@ -904,9 +950,10 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           </Key>
           <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
           <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="VOLUME" Type="Int64" />
+          <Property Name="ESTALCOOLISE" Type="Boolean" />
           <Property Name="ID_BAR" Type="Int32" Nullable="false" />
           <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="VOLUME" Type="Int64" />
           <Property Name="QUANTITESTOCK" Type="Int64" />
           <Property Name="PRIX" Type="Int64" />
           <Property Name="ID_ALLERGENE" Type="Int32" />
@@ -962,6 +1009,22 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="somme" Type="Decimal" />
         </EntityType>
+        <EntityType Name="view_stats_commande_emporter_plus">
+          <Key>
+            <PropertyRef Name="ID_PRODUIT" />
+          </Key>
+          <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+          <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Decimal" />
+        </EntityType>
+        <EntityType Name="view_stats_commande_surplace_plus">
+          <Key>
+            <PropertyRef Name="ID_PRODUIT" />
+          </Key>
+          <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+          <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Decimal" />
+        </EntityType>
         <Association Name="AEMPORTER_ibfk_1">
           <End Role="users" Type="Self.users" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -997,6 +1060,18 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </Principal>
             <Dependent Role="AEMPORTER">
               <PropertyRef Name="IDCOMMANDE_HER_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORISER_ALLERGENE">
+          <End Role="ALLERGENE" Type="Self.ALLERGENE" Multiplicity="1" />
+          <End Role="CATEGORISER" Type="Self.CATEGORISER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALLERGENE">
+              <PropertyRef Name="ID_ALLERGENE" />
+            </Principal>
+            <Dependent Role="CATEGORISER">
+              <PropertyRef Name="ID_ALLERGENE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1058,6 +1133,18 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
               <PropertyRef Name="ID_PRODUIT" />
             </Principal>
             <Dependent Role="BOISSON">
+              <PropertyRef Name="ID_PRODUIT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORISER_PRODUIT">
+          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+          <End Role="CATEGORISER" Type="Self.CATEGORISER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUIT">
+              <PropertyRef Name="ID_PRODUIT" />
+            </Principal>
+            <Dependent Role="CATEGORISER">
               <PropertyRef Name="ID_PRODUIT" />
             </Dependent>
           </ReferentialConstraint>
@@ -1124,10 +1211,6 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="CATEGORISER">
-          <End Role="ALLERGENE" Type="Self.ALLERGENE" Multiplicity="*" />
-          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="*" />
-        </Association>
         <Association Name="RECOIS">
           <End Role="BARS" Type="Self.BARS" Multiplicity="*" />
           <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
@@ -1138,6 +1221,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           <EntitySet Name="BARMAN" EntityType="Self.BARMAN" />
           <EntitySet Name="BARS" EntityType="Self.BARS" />
           <EntitySet Name="BOISSON" EntityType="Self.BOISSON" />
+          <EntitySet Name="CATEGORISER" EntityType="Self.CATEGORISER" />
           <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" />
           <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
           <EntitySet Name="COMPOSER" EntityType="Self.COMPOSER" />
@@ -1157,6 +1241,8 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           <EntitySet Name="view_nourriture" EntityType="Self.view_nourriture" />
           <EntitySet Name="view_produit_serveur" EntityType="Self.view_produit_serveur" />
           <EntitySet Name="view_stat_produit" EntityType="Self.view_stat_produit" />
+          <EntitySet Name="view_stats_commande_emporter_plus" EntityType="Self.view_stats_commande_emporter_plus" />
+          <EntitySet Name="view_stats_commande_surplace_plus" EntityType="Self.view_stats_commande_surplace_plus" />
           <AssociationSet Name="AEMPORTER_ibfk_1" Association="Self.AEMPORTER_ibfk_1">
             <End Role="users" EntitySet="users" />
             <End Role="AEMPORTER" EntitySet="AEMPORTER" />
@@ -1168,6 +1254,10 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
           <AssociationSet Name="FK_AEMPORTER_COMMANDE1" Association="Self.FK_AEMPORTER_COMMANDE1">
             <End Role="COMMANDE" EntitySet="COMMANDE" />
             <End Role="AEMPORTER" EntitySet="AEMPORTER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORISER_ALLERGENE" Association="Self.FK_CATEGORISER_ALLERGENE">
+            <End Role="ALLERGENE" EntitySet="ALLERGENE" />
+            <End Role="CATEGORISER" EntitySet="CATEGORISER" />
           </AssociationSet>
           <AssociationSet Name="FK_BARMAN_BARS" Association="Self.FK_BARMAN_BARS">
             <End Role="BARS" EntitySet="BARS" />
@@ -1189,6 +1279,10 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="BOISSON" EntitySet="BOISSON" />
           </AssociationSet>
+          <AssociationSet Name="FK_CATEGORISER_PRODUIT" Association="Self.FK_CATEGORISER_PRODUIT">
+            <End Role="PRODUIT" EntitySet="PRODUIT" />
+            <End Role="CATEGORISER" EntitySet="CATEGORISER" />
+          </AssociationSet>
           <AssociationSet Name="FK_COMPOSER_COMMANDE" Association="Self.FK_COMPOSER_COMMANDE">
             <End Role="COMMANDE" EntitySet="COMMANDE" />
             <End Role="COMPOSER" EntitySet="COMPOSER" />
@@ -1209,10 +1303,6 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="STOCKER" EntitySet="STOCKER" />
           </AssociationSet>
-          <AssociationSet Name="CATEGORISER" Association="Self.CATEGORISER">
-            <End Role="ALLERGENE" EntitySet="ALLERGENE" />
-            <End Role="PRODUIT" EntitySet="PRODUIT" />
-          </AssociationSet>
           <AssociationSet Name="RECOIS" Association="Self.RECOIS">
             <End Role="BARS" EntitySet="BARS" />
             <End Role="COMMANDE" EntitySet="COMMANDE" />
@@ -1223,9 +1313,9 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="mdlBarStoreContainer" CdmEntityContainer="riledhouEntities">
+        <EntityContainerMapping StorageEntityContainer="riledhouModelStoreContainer" CdmEntityContainer="riledhouEntities">
           <EntitySetMapping Name="AEMPORTER">
-            <EntityTypeMapping TypeName="mdlBar.AEMPORTER">
+            <EntityTypeMapping TypeName="riledhouModel.AEMPORTER">
               <MappingFragment StoreEntitySet="AEMPORTER">
                 <ScalarProperty Name="IDCOMMANDE_HER_1" ColumnName="IDCOMMANDE_HER_1" />
                 <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
@@ -1236,7 +1326,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ALLERGENE">
-            <EntityTypeMapping TypeName="mdlBar.ALLERGENE">
+            <EntityTypeMapping TypeName="riledhouModel.ALLERGENE">
               <MappingFragment StoreEntitySet="ALLERGENE">
                 <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
                 <ScalarProperty Name="LIBALLERGENE" ColumnName="LIBALLERGENE" />
@@ -1244,7 +1334,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BARMAN">
-            <EntityTypeMapping TypeName="mdlBar.BARMAN">
+            <EntityTypeMapping TypeName="riledhouModel.BARMAN">
               <MappingFragment StoreEntitySet="BARMAN">
                 <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
                 <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
@@ -1260,7 +1350,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BARS">
-            <EntityTypeMapping TypeName="mdlBar.BARS">
+            <EntityTypeMapping TypeName="riledhouModel.BARS">
               <MappingFragment StoreEntitySet="BARS">
                 <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
                 <ScalarProperty Name="ID_TYPE" ColumnName="ID_TYPE" />
@@ -1273,7 +1363,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BOISSON">
-            <EntityTypeMapping TypeName="mdlBar.BOISSON">
+            <EntityTypeMapping TypeName="riledhouModel.BOISSON">
               <MappingFragment StoreEntitySet="BOISSON">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="ESTALCOOLISE" ColumnName="ESTALCOOLISE" />
@@ -1282,8 +1372,17 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORISER">
+            <EntityTypeMapping TypeName="riledhouModel.CATEGORISER">
+              <MappingFragment StoreEntitySet="CATEGORISER">
+                <ScalarProperty Name="IDALLERGENE" ColumnName="IDALLERGENE" />
+                <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+                <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CLIENTS">
-            <EntityTypeMapping TypeName="mdlBar.CLIENTS">
+            <EntityTypeMapping TypeName="riledhouModel.CLIENTS">
               <MappingFragment StoreEntitySet="CLIENTS">
                 <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
@@ -1295,7 +1394,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="COMMANDE">
-            <EntityTypeMapping TypeName="mdlBar.COMMANDE">
+            <EntityTypeMapping TypeName="riledhouModel.COMMANDE">
               <MappingFragment StoreEntitySet="COMMANDE">
                 <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
                 <ScalarProperty Name="HEURECOMMANDE" ColumnName="HEURECOMMANDE" />
@@ -1303,7 +1402,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="COMPOSER">
-            <EntityTypeMapping TypeName="mdlBar.COMPOSER">
+            <EntityTypeMapping TypeName="riledhouModel.COMPOSER">
               <MappingFragment StoreEntitySet="COMPOSER">
                 <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
@@ -1312,7 +1411,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="failed_jobs">
-            <EntityTypeMapping TypeName="mdlBar.failed_jobs">
+            <EntityTypeMapping TypeName="riledhouModel.failed_jobs">
               <MappingFragment StoreEntitySet="failed_jobs">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="uuid" ColumnName="uuid" />
@@ -1325,7 +1424,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="migrations">
-            <EntityTypeMapping TypeName="mdlBar.migrations">
+            <EntityTypeMapping TypeName="riledhouModel.migrations">
               <MappingFragment StoreEntitySet="migrations">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="migration" ColumnName="migration" />
@@ -1334,7 +1433,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NOURRITURE">
-            <EntityTypeMapping TypeName="mdlBar.NOURRITURE">
+            <EntityTypeMapping TypeName="riledhouModel.NOURRITURE">
               <MappingFragment StoreEntitySet="NOURRITURE">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="POIDS" ColumnName="POIDS" />
@@ -1342,7 +1441,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="personal_access_tokens">
-            <EntityTypeMapping TypeName="mdlBar.personal_access_tokens">
+            <EntityTypeMapping TypeName="riledhouModel.personal_access_tokens">
               <MappingFragment StoreEntitySet="personal_access_tokens">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tokenable_type" ColumnName="tokenable_type" />
@@ -1358,7 +1457,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUIT">
-            <EntityTypeMapping TypeName="mdlBar.PRODUIT">
+            <EntityTypeMapping TypeName="riledhouModel.PRODUIT">
               <MappingFragment StoreEntitySet="PRODUIT">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -1366,7 +1465,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STOCKER">
-            <EntityTypeMapping TypeName="mdlBar.STOCKER">
+            <EntityTypeMapping TypeName="riledhouModel.STOCKER">
               <MappingFragment StoreEntitySet="STOCKER">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
@@ -1376,7 +1475,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SURPLACE">
-            <EntityTypeMapping TypeName="mdlBar.SURPLACE">
+            <EntityTypeMapping TypeName="riledhouModel.SURPLACE">
               <MappingFragment StoreEntitySet="SURPLACE">
                 <ScalarProperty Name="IDCOMMANDE" ColumnName="IDCOMMANDE" />
                 <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
@@ -1385,7 +1484,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TYPEBAR">
-            <EntityTypeMapping TypeName="mdlBar.TYPEBAR">
+            <EntityTypeMapping TypeName="riledhouModel.TYPEBAR">
               <MappingFragment StoreEntitySet="TYPEBAR">
                 <ScalarProperty Name="ID_TYPE" ColumnName="ID_TYPE" />
                 <ScalarProperty Name="NOM_TYPE" ColumnName="NOM_TYPE" />
@@ -1393,7 +1492,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="mdlBar.users">
+            <EntityTypeMapping TypeName="riledhouModel.users">
               <MappingFragment StoreEntitySet="users">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1407,7 +1506,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="password_resets">
-            <EntityTypeMapping TypeName="mdlBar.password_resets">
+            <EntityTypeMapping TypeName="riledhouModel.password_resets">
               <MappingFragment StoreEntitySet="password_resets">
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="token" ColumnName="token" />
@@ -1416,7 +1515,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_boisson_alcool">
-            <EntityTypeMapping TypeName="mdlBar.view_boisson_alcool">
+            <EntityTypeMapping TypeName="riledhouModel.view_boisson_alcool">
               <MappingFragment StoreEntitySet="view_boisson_alcool">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -1433,13 +1532,14 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_boisson_sans_alcool">
-            <EntityTypeMapping TypeName="mdlBar.view_boisson_sans_alcool">
+            <EntityTypeMapping TypeName="riledhouModel.view_boisson_sans_alcool">
               <MappingFragment StoreEntitySet="view_boisson_sans_alcool">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+                <ScalarProperty Name="VOLUME" ColumnName="VOLUME" />
+                <ScalarProperty Name="ESTALCOOLISE" ColumnName="ESTALCOOLISE" />
                 <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
                 <ScalarProperty Name="NOMBAR" ColumnName="NOMBAR" />
-                <ScalarProperty Name="VOLUME" ColumnName="VOLUME" />
                 <ScalarProperty Name="QUANTITESTOCK" ColumnName="QUANTITESTOCK" />
                 <ScalarProperty Name="PRIX" ColumnName="PRIX" />
                 <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
@@ -1448,7 +1548,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_boissons">
-            <EntityTypeMapping TypeName="mdlBar.view_boissons">
+            <EntityTypeMapping TypeName="riledhouModel.view_boissons">
               <MappingFragment StoreEntitySet="view_boissons">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -1465,7 +1565,7 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_nourriture">
-            <EntityTypeMapping TypeName="mdlBar.view_nourriture">
+            <EntityTypeMapping TypeName="riledhouModel.view_nourriture">
               <MappingFragment StoreEntitySet="view_nourriture">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
                 <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
@@ -1480,14 +1580,14 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_produit_serveur">
-            <EntityTypeMapping TypeName="mdlBar.view_produit_serveur">
+            <EntityTypeMapping TypeName="riledhouModel.view_produit_serveur">
               <MappingFragment StoreEntitySet="view_produit_serveur">
                 <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_stat_produit">
-            <EntityTypeMapping TypeName="mdlBar.view_stat_produit">
+            <EntityTypeMapping TypeName="riledhouModel.view_stat_produit">
               <MappingFragment StoreEntitySet="view_stat_produit">
                 <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
                 <ScalarProperty Name="NOMBAR" ColumnName="NOMBAR" />
@@ -1497,15 +1597,25 @@ FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CATEGORISER" TypeName="mdlBar.CATEGORISER" StoreEntitySet="CATEGORISER">
-            <EndProperty Name="ALLERGENE">
-              <ScalarProperty Name="ID_ALLERGENE" ColumnName="ID_ALLERGENE" />
-            </EndProperty>
-            <EndProperty Name="PRODUIT">
-              <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="RECOIS" TypeName="mdlBar.RECOIS" StoreEntitySet="RECOIS">
+          <EntitySetMapping Name="view_stats_commande_emporter_plus">
+            <EntityTypeMapping TypeName="riledhouModel.view_stats_commande_emporter_plus">
+              <MappingFragment StoreEntitySet="view_stats_commande_emporter_plus">
+                <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+                <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_stats_commande_surplace_plus">
+            <EntityTypeMapping TypeName="riledhouModel.view_stats_commande_surplace_plus">
+              <MappingFragment StoreEntitySet="view_stats_commande_surplace_plus">
+                <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+                <ScalarProperty Name="NOM_PRODUIT" ColumnName="NOM_PRODUIT" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RECOIS" TypeName="riledhouModel.RECOIS" StoreEntitySet="RECOIS">
             <EndProperty Name="BARS">
               <ScalarProperty Name="ID_BAR" ColumnName="ID_BAR" />
             </EndProperty>

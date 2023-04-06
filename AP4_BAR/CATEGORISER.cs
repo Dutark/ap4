@@ -12,17 +12,13 @@ namespace AP4_BAR
     using System;
     using System.Collections.Generic;
     
-    public partial class view_boisson_sans_alcool
+    public partial class CATEGORISER
     {
+        public int IDALLERGENE { get; set; }
         public int ID_PRODUIT { get; set; }
-        public string NOM_PRODUIT { get; set; }
-        public Nullable<long> VOLUME { get; set; }
-        public Nullable<bool> ESTALCOOLISE { get; set; }
-        public int ID_BAR { get; set; }
-        public string NOMBAR { get; set; }
-        public Nullable<long> QUANTITESTOCK { get; set; }
-        public Nullable<long> PRIX { get; set; }
-        public Nullable<int> ID_ALLERGENE { get; set; }
-        public string LIBALLERGENE { get; set; }
+        public int ID_ALLERGENE { get; set; }
+    
+        public virtual ALLERGENE ALLERGENE { get; set; }
+        public virtual PRODUIT PRODUIT { get; set; }
     }
 }
