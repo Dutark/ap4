@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace AP4_BAR
 {
-    public partial class FormProduits : Form
+    public partial class listeProduits : Form
     {
 
         private int idBar;
-        public FormProduits(int idBar)
+        public listeProduits(int idBar)
         {
             InitializeComponent();
             this.idBar = idBar;
@@ -25,7 +25,9 @@ namespace AP4_BAR
             bsProduits.DataSource = Modele.listeProduit().Select(x => new
             {
                 x.ID_BAR,
-                x.ID_PRODUIT,
+                x.BARS.NOMBAR,
+                x.PRODUIT.NOM_PRODUIT,
+                //x.PRODUIT.BOISSON.ESTALCOOLISE,
                 x.QUANTITESTOCK,
                 x.PRIX
 
@@ -33,10 +35,12 @@ namespace AP4_BAR
 
             //ici j'ajoute des infos dans l'header
             dgvProduits.DataSource = bsProduits;
-            dgvProduits.Columns[0].HeaderText = "Id du bar";//Il est ou Myan ?
-            dgvProduits.Columns[1].HeaderText = "Id du produit"; //Yo
-            dgvProduits.Columns[2].HeaderText = "Quantité du produit"; //Mr brosseau le POAT
-            dgvProduits.Columns[3].HeaderText = "Prix du produit"; //le prix de la tesla model S
+            dgvProduits.Columns[0].HeaderText = "Id du bar"; //Yo
+            dgvProduits.Columns[1].HeaderText = "Nom du bar"; //Yo
+            dgvProduits.Columns[2].HeaderText = "Nom du produit"; //Yo
+            //dgvProduits.Columns[2].HeaderText = "Est alcoolisé"; //Yo
+            dgvProduits.Columns[3].HeaderText = "Quantité du produit"; //Mr brosseau le POAT
+            dgvProduits.Columns[4].HeaderText = "Prix du produit"; //le prix de la tesla model S
         }
 
         private void btn_suppr_Click_1(object sender, EventArgs e)

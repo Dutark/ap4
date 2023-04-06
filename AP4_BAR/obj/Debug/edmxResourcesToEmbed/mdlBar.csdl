@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="riledhouModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="mdlBar" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AEMPORTER">
     <Key>
       <PropertyRef Name="IDCOMMANDE_HER_1" />
     </Key>
     <Property Name="IDCOMMANDE_HER_1" Type="Int32" Nullable="false" />
     <Property Name="IDCOMMANDE" Type="Int32" Nullable="false" />
-    <Property Name="ID_USER" Type="Int32" Nullable="false" />
+    <Property Name="ID_USER" Type="Decimal" Nullable="false" />
     <Property Name="HEURERETRAIT" Type="DateTime" />
-    <Property Name="CODERETRAIT" Type="Int64" />
-    <NavigationProperty Name="CLIENTS" Relationship="Self.FK_AEMPORTER_CLIENTS" FromRole="AEMPORTER" ToRole="CLIENTS" />
+    <Property Name="CODERETRAIT" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="users" Relationship="Self.AEMPORTER_ibfk_1" FromRole="AEMPORTER" ToRole="users" />
     <NavigationProperty Name="COMMANDE" Relationship="Self.FK_AEMPORTER_COMMANDE" FromRole="AEMPORTER" ToRole="COMMANDE" />
     <NavigationProperty Name="COMMANDE1" Relationship="Self.FK_AEMPORTER_COMMANDE1" FromRole="AEMPORTER" ToRole="COMMANDE" />
   </EntityType>
@@ -30,11 +30,11 @@
     <Property Name="ESTDIRIGEANT" Type="Boolean" />
     <Property Name="DATE_ARRIVER" Type="DateTime" />
     <Property Name="DATE_DEPART" Type="DateTime" />
-    <Property Name="ESTBARMAN" Type="Boolean" />
+    <Property Name="ESTBARMAN" Type="Boolean" Nullable="false" />
     <Property Name="NOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="PRENOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="MAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="MDP" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="MDP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="BARS" Relationship="Self.FK_BARMAN_BARS" FromRole="BARMAN" ToRole="BARS" />
     <NavigationProperty Name="SURPLACE" Relationship="Self.FK_SURPLACE_BARMAN" FromRole="BARMAN" ToRole="SURPLACE" />
   </EntityType>
@@ -69,12 +69,11 @@
       <PropertyRef Name="ID_USER" />
     </Key>
     <Property Name="ID_USER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DATEINSCRIPTION" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" />
     <Property Name="NOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="PRENOM" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <Property Name="MAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="MDP" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="AEMPORTER" Relationship="Self.FK_AEMPORTER_CLIENTS" FromRole="CLIENTS" ToRole="AEMPORTER" />
+    <Property Name="MDP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="COMMANDE">
     <Key>
@@ -99,6 +98,26 @@
     <NavigationProperty Name="COMMANDE" Relationship="Self.FK_COMPOSER_COMMANDE" FromRole="COMPOSER" ToRole="COMMANDE" />
     <NavigationProperty Name="PRODUIT" Relationship="Self.FK_COMPOSER_PRODUIT" FromRole="COMPOSER" ToRole="PRODUIT" />
   </EntityType>
+  <EntityType Name="failed_jobs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uuid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="connection" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="queue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="payload" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="exception" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="failed_at" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="migrations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="migration" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="batch" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="NOURRITURE">
     <Key>
       <PropertyRef Name="ID_PRODUIT" />
@@ -106,6 +125,21 @@
     <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
     <Property Name="POIDS" Type="Int64" />
     <NavigationProperty Name="PRODUIT" Relationship="Self.FK_NOURRITURE_PRODUIT" FromRole="NOURRITURE" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="personal_access_tokens">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tokenable_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tokenable_id" Type="Decimal" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="token" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="abilities" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="last_used_at" Type="DateTime" />
+    <Property Name="expires_at" Type="DateTime" />
+    <Property Name="created_at" Type="DateTime" />
+    <Property Name="updated_at" Type="DateTime" />
   </EntityType>
   <EntityType Name="PRODUIT">
     <Key>
@@ -149,12 +183,119 @@
     <Property Name="NOM_TYPE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="BARS" Relationship="Self.FK_BARS_TYPEBAR" FromRole="TYPEBAR" ToRole="BARS" />
   </EntityType>
-  <Association Name="FK_AEMPORTER_CLIENTS">
-    <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="1" />
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email_verified_at" Type="DateTime" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="remember_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="created_at" Type="DateTime" />
+    <Property Name="updated_at" Type="DateTime" />
+    <NavigationProperty Name="AEMPORTER" Relationship="Self.AEMPORTER_ibfk_1" FromRole="users" ToRole="AEMPORTER" />
+  </EntityType>
+  <EntityType Name="password_resets">
+    <Key>
+      <PropertyRef Name="email" />
+      <PropertyRef Name="token" />
+    </Key>
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="token" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="view_boisson_alcool">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="VOLUME" Type="Int64" />
+    <Property Name="ESTALCOOLISE" Type="Boolean" />
+    <Property Name="DEGREALCOOL" Type="Int64" />
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="QUANTITESTOCK" Type="Int64" />
+    <Property Name="PRIX" Type="Int64" />
+    <Property Name="ID_ALLERGENE" Type="Int32" />
+    <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="view_boisson_sans_alcool">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="VOLUME" Type="Int64" />
+    <Property Name="QUANTITESTOCK" Type="Int64" />
+    <Property Name="PRIX" Type="Int64" />
+    <Property Name="ID_ALLERGENE" Type="Int32" />
+    <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="view_boissons">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="VOLUME" Type="Int64" />
+    <Property Name="ESTALCOOLISE" Type="Boolean" />
+    <Property Name="DEGREALCOOL" Type="Int64" />
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="QUANTITESTOCK" Type="Int64" />
+    <Property Name="PRIX" Type="Int64" />
+    <Property Name="ID_ALLERGENE" Type="Int32" />
+    <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="view_nourriture">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+      <PropertyRef Name="ID_ALLERGENE" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="POIDS" Type="Int64" />
+    <Property Name="QUANTITESTOCK" Type="Int64" />
+    <Property Name="PRIX" Type="Int64" />
+    <Property Name="ID_ALLERGENE" Type="Int32" Nullable="false" />
+    <Property Name="LIBALLERGENE" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="view_produit_serveur">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="view_stat_produit">
+    <Key>
+      <PropertyRef Name="ID_BAR" />
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_BAR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBAR" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="somme" Type="Decimal" />
+  </EntityType>
+  <Association Name="AEMPORTER_ibfk_1">
+    <End Role="users" Type="Self.users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="AEMPORTER" Type="Self.AEMPORTER" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CLIENTS">
-        <PropertyRef Name="ID_USER" />
+      <Principal Role="users">
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="AEMPORTER">
         <PropertyRef Name="ID_USER" />
@@ -234,7 +375,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_BOISSON_PRODUIT">
-    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="BOISSON" Type="Self.BOISSON" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="PRODUIT">
@@ -294,7 +437,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_STOCKER_PRODUIT">
-    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="STOCKER" Type="Self.STOCKER" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PRODUIT">
@@ -322,13 +467,24 @@
     <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" />
     <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
     <EntitySet Name="COMPOSER" EntityType="Self.COMPOSER" />
+    <EntitySet Name="failed_jobs" EntityType="Self.failed_jobs" />
+    <EntitySet Name="migrations" EntityType="Self.migrations" />
     <EntitySet Name="NOURRITURE" EntityType="Self.NOURRITURE" />
+    <EntitySet Name="personal_access_tokens" EntityType="Self.personal_access_tokens" />
     <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" />
     <EntitySet Name="STOCKER" EntityType="Self.STOCKER" />
     <EntitySet Name="SURPLACE" EntityType="Self.SURPLACE" />
     <EntitySet Name="TYPEBAR" EntityType="Self.TYPEBAR" />
-    <AssociationSet Name="FK_AEMPORTER_CLIENTS" Association="Self.FK_AEMPORTER_CLIENTS">
-      <End Role="CLIENTS" EntitySet="CLIENTS" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <EntitySet Name="password_resets" EntityType="Self.password_resets" />
+    <EntitySet Name="view_boisson_alcool" EntityType="Self.view_boisson_alcool" />
+    <EntitySet Name="view_boisson_sans_alcool" EntityType="Self.view_boisson_sans_alcool" />
+    <EntitySet Name="view_boissons" EntityType="Self.view_boissons" />
+    <EntitySet Name="view_nourriture" EntityType="Self.view_nourriture" />
+    <EntitySet Name="view_produit_serveur" EntityType="Self.view_produit_serveur" />
+    <EntitySet Name="view_stat_produit" EntityType="Self.view_stat_produit" />
+    <AssociationSet Name="AEMPORTER_ibfk_1" Association="Self.AEMPORTER_ibfk_1">
+      <End Role="users" EntitySet="users" />
       <End Role="AEMPORTER" EntitySet="AEMPORTER" />
     </AssociationSet>
     <AssociationSet Name="FK_AEMPORTER_COMMANDE" Association="Self.FK_AEMPORTER_COMMANDE">

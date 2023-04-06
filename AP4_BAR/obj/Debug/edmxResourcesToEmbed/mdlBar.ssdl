@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="riledhouModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="mdlBar.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AEMPORTER">
     <Key>
       <PropertyRef Name="IDCOMMANDE_HER_1" />
     </Key>
     <Property Name="IDCOMMANDE_HER_1" Type="int" Nullable="false" />
     <Property Name="IDCOMMANDE" Type="int" Nullable="false" />
-    <Property Name="ID_USER" Type="int" Nullable="false" />
+    <Property Name="ID_USER" Type="ubigint" Nullable="false" />
     <Property Name="HEURERETRAIT" Type="datetime" Precision="0" />
-    <Property Name="CODERETRAIT" Type="bigint" />
+    <Property Name="CODERETRAIT" Type="text" />
   </EntityType>
   <EntityType Name="ALLERGENE">
     <Key>
@@ -24,13 +24,13 @@
     <Property Name="ID_USER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ID_BAR" Type="int" Nullable="false" />
     <Property Name="ESTDIRIGEANT" Type="bool" />
-    <Property Name="DATE_ARRIVER" Type="date" />
-    <Property Name="DATE_DEPART" Type="date" />
-    <Property Name="ESTBARMAN" Type="bool" />
-    <Property Name="NOM" Type="char" MaxLength="32" />
-    <Property Name="PRENOM" Type="char" MaxLength="32" />
-    <Property Name="MAIL" Type="char" MaxLength="40" />
-    <Property Name="MDP" Type="char" MaxLength="32" />
+    <Property Name="DATE_ARRIVER" Type="datetime" Precision="0" />
+    <Property Name="DATE_DEPART" Type="datetime" Precision="0" />
+    <Property Name="ESTBARMAN" Type="bool" Nullable="false" />
+    <Property Name="NOM" Type="varchar" MaxLength="32" />
+    <Property Name="PRENOM" Type="varchar" MaxLength="32" />
+    <Property Name="MAIL" Type="varchar" MaxLength="40" />
+    <Property Name="MDP" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="BARS">
     <Key>
@@ -66,11 +66,11 @@
       <PropertyRef Name="ID_USER" />
     </Key>
     <Property Name="ID_USER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DATEINSCRIPTION" Type="char" MaxLength="32" />
+    <Property Name="created_at" Type="timestamp" Precision="0" />
     <Property Name="NOM" Type="char" MaxLength="32" />
     <Property Name="PRENOM" Type="char" MaxLength="32" />
     <Property Name="MAIL" Type="char" MaxLength="40" />
-    <Property Name="MDP" Type="char" MaxLength="32" />
+    <Property Name="MDP" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="COMMANDE">
     <Key>
@@ -88,12 +88,58 @@
     <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
     <Property Name="QUANTITE" Type="bigint" />
   </EntityType>
+  <EntityType Name="failed_jobs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="ubigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uuid" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="connection" Type="text" Nullable="false" />
+    <Property Name="queue" Type="text" Nullable="false" />
+    <Property Name="payload" Type="longtext" Nullable="false" />
+    <Property Name="exception" Type="longtext" Nullable="false" />
+    <Property Name="failed_at" Type="timestamp" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="migrations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="migration" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="batch" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="NOURRITURE">
     <Key>
       <PropertyRef Name="ID_PRODUIT" />
     </Key>
     <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
     <Property Name="POIDS" Type="bigint" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.password_resets' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="password_resets">
+    <Key>
+      <PropertyRef Name="email" />
+      <PropertyRef Name="token" />
+    </Key>
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="token" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="created_at" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityType Name="personal_access_tokens">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="ubigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tokenable_type" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="tokenable_id" Type="ubigint" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="token" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="abilities" Type="text" />
+    <Property Name="last_used_at" Type="timestamp" Precision="0" />
+    <Property Name="expires_at" Type="timestamp" Precision="0" />
+    <Property Name="created_at" Type="timestamp" Precision="0" />
+    <Property Name="updated_at" Type="timestamp" Precision="0" />
   </EntityType>
   <EntityType Name="PRODUIT">
     <Key>
@@ -135,12 +181,121 @@
     <Property Name="ID_TYPE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NOM_TYPE" Type="char" MaxLength="32" />
   </EntityType>
-  <Association Name="FK_AEMPORTER_CLIENTS">
-    <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="1" />
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="ubigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="email_verified_at" Type="timestamp" Precision="0" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="remember_token" Type="varchar" MaxLength="100" />
+    <Property Name="created_at" Type="timestamp" Precision="0" />
+    <Property Name="updated_at" Type="timestamp" Precision="0" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_boisson_alcool' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_boisson_alcool">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="VOLUME" Type="bigint" />
+    <Property Name="ESTALCOOLISE" Type="bool" />
+    <Property Name="DEGREALCOOL" Type="bigint" />
+    <Property Name="ID_BAR" Type="int" Nullable="false" />
+    <Property Name="NOMBAR" Type="char" MaxLength="32" />
+    <Property Name="QUANTITESTOCK" Type="bigint" />
+    <Property Name="PRIX" Type="bigint" />
+    <Property Name="ID_ALLERGENE" Type="int" />
+    <Property Name="LIBALLERGENE" Type="char" MaxLength="32" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_boisson_sans_alcool' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_boisson_sans_alcool">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="ID_BAR" Type="int" Nullable="false" />
+    <Property Name="NOMBAR" Type="char" MaxLength="32" />
+    <Property Name="VOLUME" Type="bigint" />
+    <Property Name="QUANTITESTOCK" Type="bigint" />
+    <Property Name="PRIX" Type="bigint" />
+    <Property Name="ID_ALLERGENE" Type="int" />
+    <Property Name="LIBALLERGENE" Type="char" MaxLength="32" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_boissons' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_boissons">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="VOLUME" Type="bigint" />
+    <Property Name="ESTALCOOLISE" Type="bool" />
+    <Property Name="DEGREALCOOL" Type="bigint" />
+    <Property Name="ID_BAR" Type="int" Nullable="false" />
+    <Property Name="NOMBAR" Type="char" MaxLength="32" />
+    <Property Name="QUANTITESTOCK" Type="bigint" />
+    <Property Name="PRIX" Type="bigint" />
+    <Property Name="ID_ALLERGENE" Type="int" />
+    <Property Name="LIBALLERGENE" Type="char" MaxLength="32" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_nourriture' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_nourriture">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+      <PropertyRef Name="ID_BAR" />
+      <PropertyRef Name="ID_ALLERGENE" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="ID_BAR" Type="int" Nullable="false" />
+    <Property Name="NOMBAR" Type="char" MaxLength="32" />
+    <Property Name="POIDS" Type="bigint" />
+    <Property Name="QUANTITESTOCK" Type="bigint" />
+    <Property Name="PRIX" Type="bigint" />
+    <Property Name="ID_ALLERGENE" Type="int" Nullable="false" />
+    <Property Name="LIBALLERGENE" Type="char" MaxLength="32" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_produit_serveur' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_produit_serveur">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'def.riledhou.view_stat_produit' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="view_stat_produit">
+    <Key>
+      <PropertyRef Name="ID_BAR" />
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_BAR" Type="int" Nullable="false" />
+    <Property Name="NOMBAR" Type="char" MaxLength="32" />
+    <Property Name="ID_PRODUIT" Type="int" Nullable="false" />
+    <Property Name="NOM_PRODUIT" Type="char" MaxLength="32" />
+    <Property Name="somme" Type="decimal" Precision="41" Scale="0" />
+  </EntityType>
+  <Association Name="AEMPORTER_ibfk_1">
+    <End Role="users" Type="Self.users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="AEMPORTER" Type="Self.AEMPORTER" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CLIENTS">
-        <PropertyRef Name="ID_USER" />
+      <Principal Role="users">
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="AEMPORTER">
         <PropertyRef Name="ID_USER" />
@@ -196,7 +351,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_BOISSON_PRODUIT">
-    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="BOISSON" Type="Self.BOISSON" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="PRODUIT">
@@ -304,7 +461,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_STOCKER_PRODUIT">
-    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="STOCKER" Type="Self.STOCKER" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PRODUIT">
@@ -339,7 +498,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="riledhouModelStoreContainer">
+  <EntityContainer Name="mdlBarStoreContainer">
     <EntitySet Name="AEMPORTER" EntityType="Self.AEMPORTER" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="ALLERGENE" EntityType="Self.ALLERGENE" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="BARMAN" EntityType="Self.BARMAN" Schema="riledhou" store:Type="Tables" />
@@ -349,14 +508,95 @@
     <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="COMPOSER" EntityType="Self.COMPOSER" Schema="riledhou" store:Type="Tables" />
+    <EntitySet Name="failed_jobs" EntityType="Self.failed_jobs" Schema="riledhou" store:Type="Tables" />
+    <EntitySet Name="migrations" EntityType="Self.migrations" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="NOURRITURE" EntityType="Self.NOURRITURE" Schema="riledhou" store:Type="Tables" />
+    <EntitySet Name="personal_access_tokens" EntityType="Self.personal_access_tokens" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="RECOIS" EntityType="Self.RECOIS" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="STOCKER" EntityType="Self.STOCKER" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="SURPLACE" EntityType="Self.SURPLACE" Schema="riledhou" store:Type="Tables" />
     <EntitySet Name="TYPEBAR" EntityType="Self.TYPEBAR" Schema="riledhou" store:Type="Tables" />
-    <AssociationSet Name="FK_AEMPORTER_CLIENTS" Association="Self.FK_AEMPORTER_CLIENTS">
-      <End Role="CLIENTS" EntitySet="CLIENTS" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="riledhou" store:Type="Tables" />
+    <EntitySet Name="password_resets" EntityType="Self.password_resets" store:Type="Tables" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`password_resets`.`email`, 
+`password_resets`.`token`, 
+`password_resets`.`created_at`
+FROM `password_resets` AS `password_resets`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_boisson_alcool" EntityType="Self.view_boisson_alcool" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_boisson_alcool`.`ID_PRODUIT`, 
+`view_boisson_alcool`.`NOM_PRODUIT`, 
+`view_boisson_alcool`.`VOLUME`, 
+`view_boisson_alcool`.`ESTALCOOLISE`, 
+`view_boisson_alcool`.`DEGREALCOOL`, 
+`view_boisson_alcool`.`ID_BAR`, 
+`view_boisson_alcool`.`NOMBAR`, 
+`view_boisson_alcool`.`QUANTITESTOCK`, 
+`view_boisson_alcool`.`PRIX`, 
+`view_boisson_alcool`.`ID_ALLERGENE`, 
+`view_boisson_alcool`.`LIBALLERGENE`
+FROM `view_boisson_alcool` AS `view_boisson_alcool`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_boisson_sans_alcool" EntityType="Self.view_boisson_sans_alcool" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_boisson_sans_alcool`.`ID_PRODUIT`, 
+`view_boisson_sans_alcool`.`NOM_PRODUIT`, 
+`view_boisson_sans_alcool`.`ID_BAR`, 
+`view_boisson_sans_alcool`.`NOMBAR`, 
+`view_boisson_sans_alcool`.`VOLUME`, 
+`view_boisson_sans_alcool`.`QUANTITESTOCK`, 
+`view_boisson_sans_alcool`.`PRIX`, 
+`view_boisson_sans_alcool`.`ID_ALLERGENE`, 
+`view_boisson_sans_alcool`.`LIBALLERGENE`
+FROM `view_boisson_sans_alcool` AS `view_boisson_sans_alcool`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_boissons" EntityType="Self.view_boissons" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_boissons`.`ID_PRODUIT`, 
+`view_boissons`.`NOM_PRODUIT`, 
+`view_boissons`.`VOLUME`, 
+`view_boissons`.`ESTALCOOLISE`, 
+`view_boissons`.`DEGREALCOOL`, 
+`view_boissons`.`ID_BAR`, 
+`view_boissons`.`NOMBAR`, 
+`view_boissons`.`QUANTITESTOCK`, 
+`view_boissons`.`PRIX`, 
+`view_boissons`.`ID_ALLERGENE`, 
+`view_boissons`.`LIBALLERGENE`
+FROM `view_boissons` AS `view_boissons`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_nourriture" EntityType="Self.view_nourriture" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_nourriture`.`ID_PRODUIT`, 
+`view_nourriture`.`NOM_PRODUIT`, 
+`view_nourriture`.`ID_BAR`, 
+`view_nourriture`.`NOMBAR`, 
+`view_nourriture`.`POIDS`, 
+`view_nourriture`.`QUANTITESTOCK`, 
+`view_nourriture`.`PRIX`, 
+`view_nourriture`.`ID_ALLERGENE`, 
+`view_nourriture`.`LIBALLERGENE`
+FROM `view_nourriture` AS `view_nourriture`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_produit_serveur" EntityType="Self.view_produit_serveur" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_produit_serveur`.`ID_PRODUIT`
+FROM `view_produit_serveur` AS `view_produit_serveur`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_stat_produit" EntityType="Self.view_stat_produit" store:Type="Views" store:Schema="riledhou">
+      <DefiningQuery>SELECT
+`view_stat_produit`.`ID_BAR`, 
+`view_stat_produit`.`NOMBAR`, 
+`view_stat_produit`.`ID_PRODUIT`, 
+`view_stat_produit`.`NOM_PRODUIT`, 
+`view_stat_produit`.`somme`
+FROM `view_stat_produit` AS `view_stat_produit`</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="AEMPORTER_ibfk_1" Association="Self.AEMPORTER_ibfk_1">
+      <End Role="users" EntitySet="users" />
       <End Role="AEMPORTER" EntitySet="AEMPORTER" />
     </AssociationSet>
     <AssociationSet Name="FK_AEMPORTER_COMMANDE" Association="Self.FK_AEMPORTER_COMMANDE">

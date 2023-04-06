@@ -14,20 +14,11 @@ namespace AP4_BAR
     
     public partial class CLIENTS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CLIENTS()
-        {
-            this.AEMPORTER = new HashSet<AEMPORTER>();
-        }
-    
         public int ID_USER { get; set; }
-        public string DATEINSCRIPTION { get; set; }
+        public Nullable<System.DateTime> created_at { get; set; }
         public string NOM { get; set; }
         public string PRENOM { get; set; }
         public string MAIL { get; set; }
         public string MDP { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AEMPORTER> AEMPORTER { get; set; }
     }
 }

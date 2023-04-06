@@ -108,6 +108,7 @@ namespace AP4_BAR
             this.Controls.Add(this.label1);
             this.Name = "connexionDirigeant";
             this.Text = "connexionDirigeant";
+            this.Load += new System.EventHandler(this.connexionDirigeant_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

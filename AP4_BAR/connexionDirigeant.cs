@@ -19,6 +19,9 @@ namespace AP4_BAR
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
+
+            
+
             if (txt_login.Text == "" || txt_mdp.Text == "")
             {
                 string message = "Erreur, vous n'avez pas rempli correctement les champs !";
@@ -42,6 +45,11 @@ namespace AP4_BAR
                 }
 
             }
+        }
+
+        private void connexionDirigeant_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

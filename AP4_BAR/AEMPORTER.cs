@@ -16,11 +16,11 @@ namespace AP4_BAR
     {
         public int IDCOMMANDE_HER_1 { get; set; }
         public int IDCOMMANDE { get; set; }
-        public int ID_USER { get; set; }
+        public decimal ID_USER { get; set; }
         public Nullable<System.DateTime> HEURERETRAIT { get; set; }
-        public Nullable<long> CODERETRAIT { get; set; }
+        public string CODERETRAIT { get; set; }
     
-        public virtual CLIENTS CLIENTS { get; set; }
+        public virtual users users { get; set; }
         public virtual COMMANDE COMMANDE { get; set; }
         public virtual COMMANDE COMMANDE1 { get; set; }
     }

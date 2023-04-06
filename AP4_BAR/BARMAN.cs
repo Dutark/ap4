@@ -25,7 +25,7 @@ namespace AP4_BAR
         public Nullable<bool> ESTDIRIGEANT { get; set; }
         public Nullable<System.DateTime> DATE_ARRIVER { get; set; }
         public Nullable<System.DateTime> DATE_DEPART { get; set; }
-        public Nullable<bool> ESTBARMAN { get; set; }
+        public bool ESTBARMAN { get; set; }
         public string NOM { get; set; }
         public string PRENOM { get; set; }
         public string MAIL { get; set; }

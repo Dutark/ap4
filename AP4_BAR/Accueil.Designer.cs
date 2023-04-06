@@ -32,12 +32,18 @@ namespace AP4_BAR
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Accueil));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.barmanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pRODUITSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lISTEDESPRODUITSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aJOUTPRODUITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificationDunProduitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rÉAPPROVISIONNEMENTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.boissonAlcooliséToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.boissonSoftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nourritureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statistiquesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leProduitLePlusVenduToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.déconnexionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -51,6 +57,7 @@ namespace AP4_BAR
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.barmanToolStripMenuItem,
             this.pRODUITSToolStripMenuItem,
             this.rÉAPPROVISIONNEMENTToolStripMenuItem,
             this.statistiquesToolStripMenuItem,
@@ -62,12 +69,34 @@ namespace AP4_BAR
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // barmanToolStripMenuItem
+            // 
+            this.barmanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listeToolStripMenuItem,
+            this.ajoutToolStripMenuItem});
+            this.barmanToolStripMenuItem.Name = "barmanToolStripMenuItem";
+            this.barmanToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.barmanToolStripMenuItem.Text = "BARMAN";
+            // 
+            // listeToolStripMenuItem
+            // 
+            this.listeToolStripMenuItem.Name = "listeToolStripMenuItem";
+            this.listeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listeToolStripMenuItem.Text = "Liste";
+            this.listeToolStripMenuItem.Click += new System.EventHandler(this.listeToolStripMenuItem_Click);
+            // 
+            // ajoutToolStripMenuItem
+            // 
+            this.ajoutToolStripMenuItem.Name = "ajoutToolStripMenuItem";
+            this.ajoutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ajoutToolStripMenuItem.Text = "Ajout";
+            this.ajoutToolStripMenuItem.Click += new System.EventHandler(this.ajoutToolStripMenuItem_Click);
+            // 
             // pRODUITSToolStripMenuItem
             // 
             this.pRODUITSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lISTEDESPRODUITSToolStripMenuItem,
-            this.aJOUTPRODUITToolStripMenuItem,
-            this.modificationDunProduitToolStripMenuItem});
+            this.aJOUTPRODUITToolStripMenuItem});
             this.pRODUITSToolStripMenuItem.Name = "pRODUITSToolStripMenuItem";
             this.pRODUITSToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.pRODUITSToolStripMenuItem.Text = "PRODUITS";
@@ -75,35 +104,61 @@ namespace AP4_BAR
             // lISTEDESPRODUITSToolStripMenuItem
             // 
             this.lISTEDESPRODUITSToolStripMenuItem.Name = "lISTEDESPRODUITSToolStripMenuItem";
-            this.lISTEDESPRODUITSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lISTEDESPRODUITSToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.lISTEDESPRODUITSToolStripMenuItem.Text = "Liste";
             this.lISTEDESPRODUITSToolStripMenuItem.Click += new System.EventHandler(this.lISTEDESPRODUITSToolStripMenuItem_Click);
             // 
             // aJOUTPRODUITToolStripMenuItem
             // 
             this.aJOUTPRODUITToolStripMenuItem.Name = "aJOUTPRODUITToolStripMenuItem";
-            this.aJOUTPRODUITToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aJOUTPRODUITToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.aJOUTPRODUITToolStripMenuItem.Text = "Ajout";
             this.aJOUTPRODUITToolStripMenuItem.Click += new System.EventHandler(this.aJOUTPRODUITToolStripMenuItem_Click);
             // 
-            // modificationDunProduitToolStripMenuItem
-            // 
-            this.modificationDunProduitToolStripMenuItem.Name = "modificationDunProduitToolStripMenuItem";
-            this.modificationDunProduitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.modificationDunProduitToolStripMenuItem.Text = "Modification";
-            this.modificationDunProduitToolStripMenuItem.Click += new System.EventHandler(this.modificationDunProduitToolStripMenuItem_Click);
-            // 
             // rÉAPPROVISIONNEMENTToolStripMenuItem
             // 
+            this.rÉAPPROVISIONNEMENTToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.boissonAlcooliséToolStripMenuItem,
+            this.boissonSoftToolStripMenuItem,
+            this.nourritureToolStripMenuItem});
             this.rÉAPPROVISIONNEMENTToolStripMenuItem.Name = "rÉAPPROVISIONNEMENTToolStripMenuItem";
             this.rÉAPPROVISIONNEMENTToolStripMenuItem.Size = new System.Drawing.Size(154, 20);
             this.rÉAPPROVISIONNEMENTToolStripMenuItem.Text = "RÉAPPROVISIONNEMENT";
             // 
+            // boissonAlcooliséToolStripMenuItem
+            // 
+            this.boissonAlcooliséToolStripMenuItem.Name = "boissonAlcooliséToolStripMenuItem";
+            this.boissonAlcooliséToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.boissonAlcooliséToolStripMenuItem.Text = "Boisson Alcoolisé";
+            this.boissonAlcooliséToolStripMenuItem.Click += new System.EventHandler(this.boissonAlcooliséToolStripMenuItem_Click);
+            // 
+            // boissonSoftToolStripMenuItem
+            // 
+            this.boissonSoftToolStripMenuItem.Name = "boissonSoftToolStripMenuItem";
+            this.boissonSoftToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.boissonSoftToolStripMenuItem.Text = "Boisson Soft";
+            this.boissonSoftToolStripMenuItem.Click += new System.EventHandler(this.boissonSoftToolStripMenuItem_Click);
+            // 
+            // nourritureToolStripMenuItem
+            // 
+            this.nourritureToolStripMenuItem.Name = "nourritureToolStripMenuItem";
+            this.nourritureToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.nourritureToolStripMenuItem.Text = "Nourriture";
+            this.nourritureToolStripMenuItem.Click += new System.EventHandler(this.nourritureToolStripMenuItem_Click);
+            // 
             // statistiquesToolStripMenuItem
             // 
+            this.statistiquesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.leProduitLePlusVenduToolStripMenuItem});
             this.statistiquesToolStripMenuItem.Name = "statistiquesToolStripMenuItem";
             this.statistiquesToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.statistiquesToolStripMenuItem.Text = "STATISTIQUES";
+            // 
+            // leProduitLePlusVenduToolStripMenuItem
+            // 
+            this.leProduitLePlusVenduToolStripMenuItem.Name = "leProduitLePlusVenduToolStripMenuItem";
+            this.leProduitLePlusVenduToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.leProduitLePlusVenduToolStripMenuItem.Text = "Le produit le plus vendu";
             // 
             // déconnexionToolStripMenuItem
             // 
@@ -175,8 +230,14 @@ namespace AP4_BAR
         private System.Windows.Forms.ToolStripMenuItem pRODUITSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lISTEDESPRODUITSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aJOUTPRODUITToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificationDunProduitToolStripMenuItem;
         private System.Windows.Forms.Panel panelPrincipal;
+        private System.Windows.Forms.ToolStripMenuItem boissonAlcooliséToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem boissonSoftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem leProduitLePlusVenduToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barmanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nourritureToolStripMenuItem;
     }
 }
 

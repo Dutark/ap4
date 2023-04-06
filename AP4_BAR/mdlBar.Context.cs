@@ -33,10 +33,21 @@ namespace AP4_BAR
         public virtual DbSet<CLIENTS> CLIENTS { get; set; }
         public virtual DbSet<COMMANDE> COMMANDE { get; set; }
         public virtual DbSet<COMPOSER> COMPOSER { get; set; }
+        public virtual DbSet<failed_jobs> failed_jobs { get; set; }
+        public virtual DbSet<migrations> migrations { get; set; }
         public virtual DbSet<NOURRITURE> NOURRITURE { get; set; }
+        public virtual DbSet<personal_access_tokens> personal_access_tokens { get; set; }
         public virtual DbSet<PRODUIT> PRODUIT { get; set; }
         public virtual DbSet<STOCKER> STOCKER { get; set; }
         public virtual DbSet<SURPLACE> SURPLACE { get; set; }
         public virtual DbSet<TYPEBAR> TYPEBAR { get; set; }
+        public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<password_resets> password_resets { get; set; }
+        public virtual DbSet<view_boisson_alcool> view_boisson_alcool { get; set; }
+        public virtual DbSet<view_boisson_sans_alcool> view_boisson_sans_alcool { get; set; }
+        public virtual DbSet<view_boissons> view_boissons { get; set; }
+        public virtual DbSet<view_nourriture> view_nourriture { get; set; }
+        public virtual DbSet<view_produit_serveur> view_produit_serveur { get; set; }
+        public virtual DbSet<view_stat_produit> view_stat_produit { get; set; }
     }
 }

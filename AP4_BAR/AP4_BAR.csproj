@@ -55,6 +55,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4d63bfbfdfd3c6e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -104,11 +107,26 @@
     <Compile Include="COMPOSER.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
-    <Compile Include="FormProduits.cs">
+    <Compile Include="failed_jobs.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gestionBarman.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProduits.Designer.cs">
-      <DependentUpon>FormProduits.cs</DependentUpon>
+    <Compile Include="gestionBarman.Designer.cs">
+      <DependentUpon>gestionBarman.cs</DependentUpon>
+    </Compile>
+    <Compile Include="listeBarman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="listeBarman.Designer.cs">
+      <DependentUpon>listeBarman.cs</DependentUpon>
+    </Compile>
+    <Compile Include="listeProduits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="listeProduits.Designer.cs">
+      <DependentUpon>listeProduits.cs</DependentUpon>
     </Compile>
     <Compile Include="Accueil.cs">
       <SubType>Form</SubType>
@@ -143,8 +161,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mdlBar.edmx</DependentUpon>
     </Compile>
+    <Compile Include="migrations.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modele.cs" />
     <Compile Include="NOURRITURE.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="password_resets.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="personal_access_tokens.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
     <Compile Include="PRODUIT.cs">
@@ -152,6 +179,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="réapproBoissonA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="réapproBoissonA.Designer.cs">
+      <DependentUpon>réapproBoissonA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="réapproBoissonS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="réapproBoissonS.Designer.cs">
+      <DependentUpon>réapproBoissonS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="réapproFood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="réapproFood.Designer.cs">
+      <DependentUpon>réapproFood.cs</DependentUpon>
+    </Compile>
     <Compile Include="STOCKER.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
@@ -161,11 +206,38 @@
     <Compile Include="TYPEBAR.cs">
       <DependentUpon>mdlBar.tt</DependentUpon>
     </Compile>
+    <Compile Include="users.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_boissons.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_boisson_alcool.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_boisson_sans_alcool.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_nourriture.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_produit_serveur.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_stat_produit.cs">
+      <DependentUpon>mdlBar.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Accueil.resx">
       <DependentUpon>Accueil.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProduits.resx">
-      <DependentUpon>FormProduits.cs</DependentUpon>
+    <EmbeddedResource Include="gestionBarman.resx">
+      <DependentUpon>gestionBarman.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="listeBarman.resx">
+      <DependentUpon>listeBarman.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="listeProduits.resx">
+      <DependentUpon>listeProduits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="connexionDirigeant.resx">
       <DependentUpon>connexionDirigeant.cs</DependentUpon>
@@ -182,6 +254,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="réapproBoissonA.resx">
+      <DependentUpon>réapproBoissonA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="réapproBoissonS.resx">
+      <DependentUpon>réapproBoissonS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="réapproFood.resx">
+      <DependentUpon>réapproFood.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="mdlBar.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>mdlBar.Designer.cs</LastGenOutput>

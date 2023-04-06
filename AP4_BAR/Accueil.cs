@@ -50,18 +50,37 @@ namespace AP4_BAR
 
         private void lISTEDESPRODUITSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormProduits(idBar));
+            openChildForm(new listeProduits(idBar));
         }
 
         private void aJOUTPRODUITToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openChildForm(new gestionProduits(EtatGestion.Create2, idBar));
+            openChildForm(new gestionProduits(EtatGestion.Create, idBar)); ;
         }
 
-
-        private void modificationDunProduitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void boissonAlcooliséToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openChildForm(new gestionProduits(EtatGestion.Update, idBar));
+            openChildForm(new réapproBoissonA(idBar));
+        }
+
+        private void boissonSoftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new réapproBoissonS(idBar));
+        }
+
+        private void listeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new listeBarman(idBar));
+        }
+
+        private void ajoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new gestionBarman(idBar));
+        }
+
+        private void nourritureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new réapproFood(idBar));
         }
     }
 }

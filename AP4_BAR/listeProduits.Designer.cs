@@ -1,7 +1,7 @@
 ﻿
 namespace AP4_BAR
 {
-    partial class FormProduits
+    partial class listeProduits
     {
         /// <summary>
         /// Required designer variable.
@@ -87,7 +87,7 @@ namespace AP4_BAR
             this.BtnFermer.UseVisualStyleBackColor = false;
             this.BtnFermer.Click += new System.EventHandler(this.BtnFermer_Click_1);
             // 
-            // FormProduits
+            // listeProduits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,7 +98,7 @@ namespace AP4_BAR
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvProduits);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormProduits";
+            this.Name = "listeProduits";
             this.Text = "AjoutProduit";
             this.Load += new System.EventHandler(this.ajoutProduit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduits)).EndInit();
